@@ -1,0 +1,9 @@
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\bin\Debug\Digital_Storehouse.exe.config
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\bin\Debug\Digital_Storehouse.exe
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\bin\Debug\Digital_Storehouse.pdb
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.csprojResolveAssemblyReference.cache
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Form1.resources
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Properties.Resources.resources
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.csproj.GenerateResource.Cache
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.exe
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.pdb
