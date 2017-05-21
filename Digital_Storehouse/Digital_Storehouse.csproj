@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DatabaseController.cs" />
+    <Compile Include="Controllers\FileUpload.cs" />
+    <Compile Include="Controllers\ViewController.cs" />
+    <Compile Include="Controllers\ViewMessages.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="StorehouseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -56,16 +63,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StorehouseDataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Views\Form1.cs">
+    <Compile Include="Views\App.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\App.Designer.cs">
+      <DependentUpon>App.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Views\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\NewCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\NewCustomer.Designer.cs">
+      <DependentUpon>NewCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateCustomer.Designer.cs">
+      <DependentUpon>UpdateCustomer.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\App.resx">
+      <DependentUpon>App.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -76,6 +95,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\NewCustomer.resx">
+      <DependentUpon>NewCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UpdateCustomer.resx">
+      <DependentUpon>UpdateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,6 +139,9 @@
   <ItemGroup>
     <Folder Include="Daos\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
