@@ -48,11 +48,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\DatabaseController.cs" />
-    <Compile Include="Controllers\FileUpload.cs" />
-    <Compile Include="Controllers\ViewController.cs" />
+    <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\NewCustomerController.cs" />
+    <Compile Include="Controllers\UpdateCustomerController.cs" />
     <Compile Include="Controllers\ViewMessages.cs" />
+    <Compile Include="Daos\AppDAO.cs" />
+    <Compile Include="Daos\DatabaseConnection.cs" />
+    <Compile Include="Daos\NewCustomerDAO.cs" />
+    <Compile Include="Controllers\NewOrderController.cs" />
+    <Compile Include="Daos\NewOrderDAO.cs" />
+    <Compile Include="Daos\UpdateCustomerDAO.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\MyTestBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\Container.cs" />
     <Compile Include="StorehouseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,6 +87,12 @@
     <Compile Include="Views\NewCustomer.Designer.cs">
       <DependentUpon>NewCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\NewOrder.Designer.cs">
+      <DependentUpon>NewOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UpdateCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,9 +110,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\NewCustomer.resx">
       <DependentUpon>NewCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewOrder.resx">
+      <DependentUpon>NewOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\UpdateCustomer.resx">
       <DependentUpon>UpdateCustomer.cs</DependentUpon>
@@ -136,12 +156,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Daos\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="app.ico" />
+    <Content Include="Resources\app.ico" />
+    <None Include="Resources\no_photo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

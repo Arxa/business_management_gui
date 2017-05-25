@@ -9,3 +9,4 @@ C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debu
 C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.App.resources
 C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.NewCustomer.resources
 C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.UpdateCustomer.resources
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.NewOrder.resources

@@ -1,4 +1,6 @@
-﻿namespace Digital_Storehouse.Views
+﻿using Digital_Storehouse.Models;
+
+namespace Digital_Storehouse.Views
 {
     partial class UpdateCustomer
     {
@@ -29,20 +31,9 @@
         private void InitializeComponent()
         {
             this.choosePhoto_button = new System.Windows.Forms.Button();
-            this.photo_textbox = new System.Windows.Forms.TextBox();
             this.photo_label = new System.Windows.Forms.Label();
             this.cancel_button = new System.Windows.Forms.Button();
-            this.addCustomer_button = new System.Windows.Forms.Button();
-            this.doy_textbox = new System.Windows.Forms.TextBox();
-            this.address_textbox = new System.Windows.Forms.TextBox();
-            this.city_textbox = new System.Windows.Forms.TextBox();
-            this.phone_textbox = new System.Windows.Forms.TextBox();
-            this.comments_textbox = new System.Windows.Forms.TextBox();
-            this.afm_textbox = new System.Windows.Forms.TextBox();
-            this.age_textbox = new System.Windows.Forms.TextBox();
-            this.birthDate_textbox = new System.Windows.Forms.TextBox();
-            this.firstName_textbox = new System.Windows.Forms.TextBox();
-            this.lastName_textbox = new System.Windows.Forms.TextBox();
+            this.updateCustomer_button = new System.Windows.Forms.Button();
             this.comments_label = new System.Windows.Forms.Label();
             this.city_label = new System.Windows.Forms.Label();
             this.phoneNumber_label = new System.Windows.Forms.Label();
@@ -54,6 +45,26 @@
             this.firstName_label = new System.Windows.Forms.Label();
             this.lastName_label = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.birthDate_picker = new System.Windows.Forms.DateTimePicker();
+            this.are_required_label = new System.Windows.Forms.Label();
+            this.asterix_warning = new System.Windows.Forms.Label();
+            this.all_fields_marked_with_label = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.removePhoto_button = new System.Windows.Forms.Button();
+            this.lastName_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.firstName_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.age_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.afm_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.address_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.doy_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.city_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.phone_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.comments_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.photo_textbox = new Digital_Storehouse.Models.MyTextBox();
+            this.hasPhoto_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,29 +72,21 @@
             // 
             this.choosePhoto_button.Cursor = System.Windows.Forms.Cursors.Hand;
             this.choosePhoto_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.choosePhoto_button.Location = new System.Drawing.Point(210, 260);
+            this.choosePhoto_button.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.choosePhoto_button.ForeColor = System.Drawing.Color.Blue;
+            this.choosePhoto_button.Location = new System.Drawing.Point(233, 331);
             this.choosePhoto_button.Name = "choosePhoto_button";
-            this.choosePhoto_button.Size = new System.Drawing.Size(56, 23);
+            this.choosePhoto_button.Size = new System.Drawing.Size(71, 23);
             this.choosePhoto_button.TabIndex = 78;
             this.choosePhoto_button.Text = "Change";
             this.choosePhoto_button.UseVisualStyleBackColor = true;
-            // 
-            // photo_textbox
-            // 
-            this.photo_textbox.Cursor = System.Windows.Forms.Cursors.No;
-            this.photo_textbox.Location = new System.Drawing.Point(91, 262);
-            this.photo_textbox.MaxLength = 100;
-            this.photo_textbox.Name = "photo_textbox";
-            this.photo_textbox.ReadOnly = true;
-            this.photo_textbox.Size = new System.Drawing.Size(100, 20);
-            this.photo_textbox.TabIndex = 77;
-            this.photo_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
+            this.choosePhoto_button.Click += new System.EventHandler(this.choosePhoto_button_Click);
             // 
             // photo_label
             // 
             this.photo_label.AutoSize = true;
             this.photo_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.photo_label.Location = new System.Drawing.Point(12, 262);
+            this.photo_label.Location = new System.Drawing.Point(33, 336);
             this.photo_label.Name = "photo_label";
             this.photo_label.Size = new System.Drawing.Size(54, 13);
             this.photo_label.TabIndex = 76;
@@ -96,7 +99,7 @@
             this.cancel_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cancel_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.cancel_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cancel_button.Location = new System.Drawing.Point(511, 346);
+            this.cancel_button.Location = new System.Drawing.Point(442, 409);
             this.cancel_button.Name = "cancel_button";
             this.cancel_button.Size = new System.Drawing.Size(73, 23);
             this.cancel_button.TabIndex = 75;
@@ -104,115 +107,27 @@
             this.cancel_button.UseVisualStyleBackColor = false;
             this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
             // 
-            // addCustomer_button
+            // updateCustomer_button
             // 
-            this.addCustomer_button.BackColor = System.Drawing.Color.Silver;
-            this.addCustomer_button.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addCustomer_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addCustomer_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.addCustomer_button.ForeColor = System.Drawing.Color.Green;
-            this.addCustomer_button.Location = new System.Drawing.Point(465, 395);
-            this.addCustomer_button.Name = "addCustomer_button";
-            this.addCustomer_button.Size = new System.Drawing.Size(119, 23);
-            this.addCustomer_button.TabIndex = 74;
-            this.addCustomer_button.Text = "Update Customer";
-            this.addCustomer_button.UseVisualStyleBackColor = false;
-            this.addCustomer_button.Click += new System.EventHandler(this.updateCustomer_button_Click);
-            // 
-            // doy_textbox
-            // 
-            this.doy_textbox.Location = new System.Drawing.Point(411, 19);
-            this.doy_textbox.MaxLength = 40;
-            this.doy_textbox.Name = "doy_textbox";
-            this.doy_textbox.Size = new System.Drawing.Size(100, 20);
-            this.doy_textbox.TabIndex = 73;
-            this.doy_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // address_textbox
-            // 
-            this.address_textbox.Location = new System.Drawing.Point(411, 64);
-            this.address_textbox.MaxLength = 40;
-            this.address_textbox.Name = "address_textbox";
-            this.address_textbox.Size = new System.Drawing.Size(100, 20);
-            this.address_textbox.TabIndex = 72;
-            this.address_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // city_textbox
-            // 
-            this.city_textbox.Location = new System.Drawing.Point(411, 109);
-            this.city_textbox.MaxLength = 40;
-            this.city_textbox.Name = "city_textbox";
-            this.city_textbox.Size = new System.Drawing.Size(100, 20);
-            this.city_textbox.TabIndex = 71;
-            this.city_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // phone_textbox
-            // 
-            this.phone_textbox.Location = new System.Drawing.Point(411, 152);
-            this.phone_textbox.MaxLength = 40;
-            this.phone_textbox.Name = "phone_textbox";
-            this.phone_textbox.Size = new System.Drawing.Size(100, 20);
-            this.phone_textbox.TabIndex = 70;
-            this.phone_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // comments_textbox
-            // 
-            this.comments_textbox.Location = new System.Drawing.Point(411, 199);
-            this.comments_textbox.MaxLength = 40;
-            this.comments_textbox.Name = "comments_textbox";
-            this.comments_textbox.Size = new System.Drawing.Size(100, 20);
-            this.comments_textbox.TabIndex = 69;
-            this.comments_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // afm_textbox
-            // 
-            this.afm_textbox.Location = new System.Drawing.Point(154, 196);
-            this.afm_textbox.MaxLength = 40;
-            this.afm_textbox.Name = "afm_textbox";
-            this.afm_textbox.Size = new System.Drawing.Size(100, 20);
-            this.afm_textbox.TabIndex = 68;
-            this.afm_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // age_textbox
-            // 
-            this.age_textbox.Location = new System.Drawing.Point(154, 152);
-            this.age_textbox.MaxLength = 3;
-            this.age_textbox.Name = "age_textbox";
-            this.age_textbox.Size = new System.Drawing.Size(100, 20);
-            this.age_textbox.TabIndex = 67;
-            this.age_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // birthDate_textbox
-            // 
-            this.birthDate_textbox.Location = new System.Drawing.Point(154, 105);
-            this.birthDate_textbox.Name = "birthDate_textbox";
-            this.birthDate_textbox.Size = new System.Drawing.Size(100, 20);
-            this.birthDate_textbox.TabIndex = 66;
-            this.birthDate_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // firstName_textbox
-            // 
-            this.firstName_textbox.Location = new System.Drawing.Point(154, 61);
-            this.firstName_textbox.MaxLength = 40;
-            this.firstName_textbox.Name = "firstName_textbox";
-            this.firstName_textbox.Size = new System.Drawing.Size(100, 20);
-            this.firstName_textbox.TabIndex = 65;
-            this.firstName_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
-            // 
-            // lastName_textbox
-            // 
-            this.lastName_textbox.Location = new System.Drawing.Point(154, 12);
-            this.lastName_textbox.MaxLength = 40;
-            this.lastName_textbox.Name = "lastName_textbox";
-            this.lastName_textbox.Size = new System.Drawing.Size(100, 20);
-            this.lastName_textbox.TabIndex = 64;
-            this.lastName_textbox.TextChanged += new System.EventHandler(this.any_textbox_TextChanged);
+            this.updateCustomer_button.BackColor = System.Drawing.Color.Silver;
+            this.updateCustomer_button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.updateCustomer_button.Enabled = false;
+            this.updateCustomer_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.updateCustomer_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.updateCustomer_button.ForeColor = System.Drawing.Color.Green;
+            this.updateCustomer_button.Location = new System.Drawing.Point(396, 458);
+            this.updateCustomer_button.Name = "updateCustomer_button";
+            this.updateCustomer_button.Size = new System.Drawing.Size(119, 23);
+            this.updateCustomer_button.TabIndex = 74;
+            this.updateCustomer_button.Text = "Update Customer";
+            this.updateCustomer_button.UseVisualStyleBackColor = false;
+            this.updateCustomer_button.Click += new System.EventHandler(this.updateCustomer_button_Click);
             // 
             // comments_label
             // 
             this.comments_label.AutoSize = true;
             this.comments_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.comments_label.Location = new System.Drawing.Point(313, 199);
+            this.comments_label.Location = new System.Drawing.Point(317, 281);
             this.comments_label.Name = "comments_label";
             this.comments_label.Size = new System.Drawing.Size(81, 13);
             this.comments_label.TabIndex = 63;
@@ -222,7 +137,7 @@
             // 
             this.city_label.AutoSize = true;
             this.city_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.city_label.Location = new System.Drawing.Point(313, 112);
+            this.city_label.Location = new System.Drawing.Point(317, 187);
             this.city_label.Name = "city_label";
             this.city_label.Size = new System.Drawing.Size(39, 13);
             this.city_label.TabIndex = 62;
@@ -232,7 +147,7 @@
             // 
             this.phoneNumber_label.AutoSize = true;
             this.phoneNumber_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.phoneNumber_label.Location = new System.Drawing.Point(313, 159);
+            this.phoneNumber_label.Location = new System.Drawing.Point(317, 234);
             this.phoneNumber_label.Name = "phoneNumber_label";
             this.phoneNumber_label.Size = new System.Drawing.Size(54, 13);
             this.phoneNumber_label.TabIndex = 61;
@@ -242,7 +157,7 @@
             // 
             this.address_label.AutoSize = true;
             this.address_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.address_label.Location = new System.Drawing.Point(313, 64);
+            this.address_label.Location = new System.Drawing.Point(317, 139);
             this.address_label.Name = "address_label";
             this.address_label.Size = new System.Drawing.Size(70, 13);
             this.address_label.TabIndex = 60;
@@ -252,7 +167,7 @@
             // 
             this.doy_label.AutoSize = true;
             this.doy_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.doy_label.Location = new System.Drawing.Point(313, 19);
+            this.doy_label.Location = new System.Drawing.Point(317, 94);
             this.doy_label.Name = "doy_label";
             this.doy_label.Size = new System.Drawing.Size(37, 13);
             this.doy_label.TabIndex = 59;
@@ -262,7 +177,7 @@
             // 
             this.afm_label.AutoSize = true;
             this.afm_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.afm_label.Location = new System.Drawing.Point(46, 203);
+            this.afm_label.Location = new System.Drawing.Point(33, 278);
             this.afm_label.Name = "afm_label";
             this.afm_label.Size = new System.Drawing.Size(36, 13);
             this.afm_label.TabIndex = 58;
@@ -272,7 +187,7 @@
             // 
             this.age_label.AutoSize = true;
             this.age_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.age_label.Location = new System.Drawing.Point(46, 159);
+            this.age_label.Location = new System.Drawing.Point(33, 234);
             this.age_label.Name = "age_label";
             this.age_label.Size = new System.Drawing.Size(36, 13);
             this.age_label.TabIndex = 57;
@@ -282,7 +197,7 @@
             // 
             this.birthDate_label.AutoSize = true;
             this.birthDate_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.birthDate_label.Location = new System.Drawing.Point(46, 112);
+            this.birthDate_label.Location = new System.Drawing.Point(33, 187);
             this.birthDate_label.Name = "birthDate_label";
             this.birthDate_label.Size = new System.Drawing.Size(89, 13);
             this.birthDate_label.TabIndex = 56;
@@ -292,7 +207,7 @@
             // 
             this.firstName_label.AutoSize = true;
             this.firstName_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.firstName_label.Location = new System.Drawing.Point(46, 64);
+            this.firstName_label.Location = new System.Drawing.Point(33, 139);
             this.firstName_label.Name = "firstName_label";
             this.firstName_label.Size = new System.Drawing.Size(89, 13);
             this.firstName_label.TabIndex = 55;
@@ -302,7 +217,7 @@
             // 
             this.lastName_label.AutoSize = true;
             this.lastName_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.lastName_label.Location = new System.Drawing.Point(46, 19);
+            this.lastName_label.Location = new System.Drawing.Point(33, 94);
             this.lastName_label.Name = "lastName_label";
             this.lastName_label.Size = new System.Drawing.Size(84, 13);
             this.lastName_label.TabIndex = 54;
@@ -310,33 +225,223 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(15, 301);
+            this.pictureBox1.Location = new System.Drawing.Point(36, 379);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(176, 156);
+            this.pictureBox1.Size = new System.Drawing.Size(230, 230);
             this.pictureBox1.TabIndex = 79;
             this.pictureBox1.TabStop = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // birthDate_picker
+            // 
+            this.birthDate_picker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.birthDate_picker.Location = new System.Drawing.Point(134, 181);
+            this.birthDate_picker.Name = "birthDate_picker";
+            this.birthDate_picker.Size = new System.Drawing.Size(108, 20);
+            this.birthDate_picker.TabIndex = 80;
+            this.birthDate_picker.Value = new System.DateTime(1994, 10, 31, 0, 0, 0, 0);
+            this.birthDate_picker.ValueChanged += new System.EventHandler(this.birthDate_picker_ValueChanged);
+            // 
+            // are_required_label
+            // 
+            this.are_required_label.AutoSize = true;
+            this.are_required_label.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.are_required_label.Location = new System.Drawing.Point(161, 20);
+            this.are_required_label.Name = "are_required_label";
+            this.are_required_label.Size = new System.Drawing.Size(73, 13);
+            this.are_required_label.TabIndex = 83;
+            this.are_required_label.Text = "are required.";
+            // 
+            // asterix_warning
+            // 
+            this.asterix_warning.AutoSize = true;
+            this.asterix_warning.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.asterix_warning.ForeColor = System.Drawing.Color.Red;
+            this.asterix_warning.Location = new System.Drawing.Point(148, 20);
+            this.asterix_warning.Name = "asterix_warning";
+            this.asterix_warning.Size = new System.Drawing.Size(18, 24);
+            this.asterix_warning.TabIndex = 82;
+            this.asterix_warning.Text = "*";
+            // 
+            // all_fields_marked_with_label
+            // 
+            this.all_fields_marked_with_label.AutoSize = true;
+            this.all_fields_marked_with_label.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.all_fields_marked_with_label.Location = new System.Drawing.Point(33, 20);
+            this.all_fields_marked_with_label.Name = "all_fields_marked_with_label";
+            this.all_fields_marked_with_label.Size = new System.Drawing.Size(118, 13);
+            this.all_fields_marked_with_label.TabIndex = 81;
+            this.all_fields_marked_with_label.Text = "All fields marked with";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(9, 87);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(18, 24);
+            this.label1.TabIndex = 84;
+            this.label1.Text = "*";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(9, 132);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(18, 24);
+            this.label2.TabIndex = 85;
+            this.label2.Text = "*";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(9, 273);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(18, 24);
+            this.label3.TabIndex = 86;
+            this.label3.Text = "*";
+            // 
+            // removePhoto_button
+            // 
+            this.removePhoto_button.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.removePhoto_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.removePhoto_button.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removePhoto_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.removePhoto_button.Location = new System.Drawing.Point(320, 331);
+            this.removePhoto_button.Name = "removePhoto_button";
+            this.removePhoto_button.Size = new System.Drawing.Size(71, 23);
+            this.removePhoto_button.TabIndex = 87;
+            this.removePhoto_button.Text = "Remove";
+            this.removePhoto_button.UseVisualStyleBackColor = true;
+            this.removePhoto_button.Click += new System.EventHandler(this.removePhotoButton_Click);
+            // 
+            // lastName_textbox
+            // 
+            this.lastName_textbox.Location = new System.Drawing.Point(134, 92);
+            this.lastName_textbox.MaxLength = 20;
+            this.lastName_textbox.Name = "lastName_textbox";
+            this.lastName_textbox.Size = new System.Drawing.Size(108, 20);
+            this.lastName_textbox.TabIndex = 88;
+            // 
+            // firstName_textbox
+            // 
+            this.firstName_textbox.Location = new System.Drawing.Point(134, 136);
+            this.firstName_textbox.MaxLength = 20;
+            this.firstName_textbox.Name = "firstName_textbox";
+            this.firstName_textbox.Size = new System.Drawing.Size(108, 20);
+            this.firstName_textbox.TabIndex = 89;
+            // 
+            // age_textbox
+            // 
+            this.age_textbox.Location = new System.Drawing.Point(134, 234);
+            this.age_textbox.MaxLength = 3;
+            this.age_textbox.Name = "age_textbox";
+            this.age_textbox.Size = new System.Drawing.Size(108, 20);
+            this.age_textbox.TabIndex = 90;
+            // 
+            // afm_textbox
+            // 
+            this.afm_textbox.Location = new System.Drawing.Point(134, 278);
+            this.afm_textbox.MaxLength = 9;
+            this.afm_textbox.Name = "afm_textbox";
+            this.afm_textbox.Size = new System.Drawing.Size(108, 20);
+            this.afm_textbox.TabIndex = 91;
+            // 
+            // address_textbox
+            // 
+            this.address_textbox.Location = new System.Drawing.Point(415, 139);
+            this.address_textbox.MaxLength = 50;
+            this.address_textbox.Name = "address_textbox";
+            this.address_textbox.Size = new System.Drawing.Size(108, 20);
+            this.address_textbox.TabIndex = 92;
+            // 
+            // doy_textbox
+            // 
+            this.doy_textbox.Location = new System.Drawing.Point(415, 91);
+            this.doy_textbox.MaxLength = 50;
+            this.doy_textbox.Name = "doy_textbox";
+            this.doy_textbox.Size = new System.Drawing.Size(108, 20);
+            this.doy_textbox.TabIndex = 93;
+            // 
+            // city_textbox
+            // 
+            this.city_textbox.Location = new System.Drawing.Point(415, 180);
+            this.city_textbox.MaxLength = 50;
+            this.city_textbox.Name = "city_textbox";
+            this.city_textbox.Size = new System.Drawing.Size(108, 20);
+            this.city_textbox.TabIndex = 94;
+            // 
+            // phone_textbox
+            // 
+            this.phone_textbox.Location = new System.Drawing.Point(415, 227);
+            this.phone_textbox.MaxLength = 50;
+            this.phone_textbox.Name = "phone_textbox";
+            this.phone_textbox.Size = new System.Drawing.Size(108, 20);
+            this.phone_textbox.TabIndex = 95;
+            // 
+            // comments_textbox
+            // 
+            this.comments_textbox.Location = new System.Drawing.Point(415, 275);
+            this.comments_textbox.MaxLength = 500;
+            this.comments_textbox.Name = "comments_textbox";
+            this.comments_textbox.Size = new System.Drawing.Size(108, 20);
+            this.comments_textbox.TabIndex = 96;
+            // 
+            // photo_textbox
+            // 
+            this.photo_textbox.Enabled = false;
+            this.photo_textbox.Location = new System.Drawing.Point(107, 333);
+            this.photo_textbox.Name = "photo_textbox";
+            this.photo_textbox.Size = new System.Drawing.Size(100, 20);
+            this.photo_textbox.TabIndex = 97;
+            // 
+            // hasPhoto_label
+            // 
+            this.hasPhoto_label.AutoSize = true;
+            this.hasPhoto_label.ForeColor = System.Drawing.SystemColors.Menu;
+            this.hasPhoto_label.Location = new System.Drawing.Point(457, 20);
+            this.hasPhoto_label.Name = "hasPhoto_label";
+            this.hasPhoto_label.Size = new System.Drawing.Size(35, 13);
+            this.hasPhoto_label.TabIndex = 98;
+            this.hasPhoto_label.Text = "label4";
             // 
             // UpdateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 469);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.choosePhoto_button);
+            this.ClientSize = new System.Drawing.Size(543, 637);
+            this.Controls.Add(this.hasPhoto_label);
             this.Controls.Add(this.photo_textbox);
-            this.Controls.Add(this.photo_label);
-            this.Controls.Add(this.cancel_button);
-            this.Controls.Add(this.addCustomer_button);
+            this.Controls.Add(this.comments_textbox);
+            this.Controls.Add(this.phone_textbox);
+            this.Controls.Add(this.city_textbox);
             this.Controls.Add(this.doy_textbox);
             this.Controls.Add(this.address_textbox);
-            this.Controls.Add(this.city_textbox);
-            this.Controls.Add(this.phone_textbox);
-            this.Controls.Add(this.comments_textbox);
             this.Controls.Add(this.afm_textbox);
             this.Controls.Add(this.age_textbox);
-            this.Controls.Add(this.birthDate_textbox);
             this.Controls.Add(this.firstName_textbox);
             this.Controls.Add(this.lastName_textbox);
+            this.Controls.Add(this.removePhoto_button);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.are_required_label);
+            this.Controls.Add(this.asterix_warning);
+            this.Controls.Add(this.all_fields_marked_with_label);
+            this.Controls.Add(this.birthDate_picker);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.choosePhoto_button);
+            this.Controls.Add(this.photo_label);
+            this.Controls.Add(this.cancel_button);
+            this.Controls.Add(this.updateCustomer_button);
             this.Controls.Add(this.comments_label);
             this.Controls.Add(this.city_label);
             this.Controls.Add(this.phoneNumber_label);
@@ -357,21 +462,12 @@
 
         #endregion
 
+
         private System.Windows.Forms.Button choosePhoto_button;
-        private System.Windows.Forms.TextBox photo_textbox;
         private System.Windows.Forms.Label photo_label;
         private System.Windows.Forms.Button cancel_button;
-        private System.Windows.Forms.Button addCustomer_button;
-        private System.Windows.Forms.TextBox doy_textbox;
-        private System.Windows.Forms.TextBox address_textbox;
-        private System.Windows.Forms.TextBox city_textbox;
-        private System.Windows.Forms.TextBox phone_textbox;
-        private System.Windows.Forms.TextBox comments_textbox;
-        private System.Windows.Forms.TextBox afm_textbox;
-        private System.Windows.Forms.TextBox age_textbox;
-        private System.Windows.Forms.TextBox birthDate_textbox;
-        private System.Windows.Forms.TextBox firstName_textbox;
-        private System.Windows.Forms.TextBox lastName_textbox;
+        private System.Windows.Forms.Button updateCustomer_button;
+
         private System.Windows.Forms.Label comments_label;
         private System.Windows.Forms.Label city_label;
         private System.Windows.Forms.Label phoneNumber_label;
@@ -383,5 +479,27 @@
         private System.Windows.Forms.Label firstName_label;
         private System.Windows.Forms.Label lastName_label;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.DateTimePicker birthDate_picker;
+        private System.Windows.Forms.Label are_required_label;
+        private System.Windows.Forms.Label asterix_warning;
+        private System.Windows.Forms.Label all_fields_marked_with_label;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button removePhoto_button;
+        private MyTextBox lastName_textbox;
+        private MyTextBox firstName_textbox;
+        private MyTextBox age_textbox;
+        private MyTextBox afm_textbox;
+        private MyTextBox address_textbox;
+        private MyTextBox doy_textbox;
+        private MyTextBox city_textbox;
+        private MyTextBox phone_textbox;
+        private MyTextBox comments_textbox;
+        private MyTextBox photo_textbox;
+        private System.Windows.Forms.Label hasPhoto_label;
     }
+
+
 }

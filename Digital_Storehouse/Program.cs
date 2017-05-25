@@ -14,13 +14,9 @@ namespace Digital_Storehouse
         [STAThread]
         static void Main()
         {
-            Controllers.DatabaseController.Connect(); // Connnect to Database Server
-            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new App());
-            //Controllers.DatabaseController.CloseConnection();
-            
         }
     }
 }
