@@ -14,7 +14,6 @@ namespace Digital_Storehouse.Views
 {
     public partial class NewOrder : Form
     {
-        private static Dictionary<String, MyTextBox> newOrderTextboxes = new Dictionary<String, MyTextBox>();
         private static BindingNavigator bindingNavigatorOrders;
 
         public NewOrder(BindingNavigator bindingNavigatorOrders1)
@@ -23,9 +22,6 @@ namespace Digital_Storehouse.Views
 
             InitializeComponent();
             NewOrderController.fillCustomerIdCombobox(customerId_F_combobox);
-
-            newOrderTextboxes["PAYMENT_METHOD"] = paymentMethod_textbox;
-            newOrderTextboxes["DELIVERY_LOCATION"] = deliveryLocation_textbox;
         }
 
         private void cancel_button_Click(object sender, EventArgs e)
@@ -35,7 +31,8 @@ namespace Digital_Storehouse.Views
 
         private void addOrder_button_Click(object sender, EventArgs e)
         {
-            NewOrderController.addNewOrder(newOrderTextboxes, orderDate_picker, customerId_F_combobox, bindingNavigatorOrders, this);
+            NewOrderController.addNewOrder(deliveryLocation_textbox, paymentMethodCombobox, 
+                orderDate_picker, customerId_F_combobox, bindingNavigatorOrders, this);
         }
     }
 }

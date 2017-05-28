@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Digital_Storehouse.Controllers;
 using Digital_Storehouse.Models;
 
 namespace Digital_Storehouse.Daos
@@ -21,20 +23,13 @@ namespace Digital_Storehouse.Daos
         public static SqlConnection Conn;
 
 
-        public DatabaseConnection(Dictionary<string, Label> customerValueLabels, BindingNavigator bindingNavigator, 
-            Dictionary<string, Label> ProductValueLabels, BindingNavigator bindingNavigator_Products, 
-            Dictionary<string, Label> OrderValueLabels, BindingNavigator bindingNavigator_Orders, 
-            Dictionary<string, Label> OrderProductsValueLabels, BindingNavigator bindingNavigator_OrdersProducts)
+        public DatabaseConnection()
         {
-            Connect();
-            BindCustomerData(customerValueLabels, bindingNavigator);
-            BindProductsData(ProductValueLabels, bindingNavigator_Products);
-            BindOrderData(OrderValueLabels, bindingNavigator_Orders);
-            BindOrdersProductsData(OrderProductsValueLabels, bindingNavigator_OrdersProducts);
+            Connect();   
         }
 
 
-        public static void Connect()
+        public void Connect()
         {
             Conn = new SqlConnection
             {
@@ -42,9 +37,10 @@ namespace Digital_Storehouse.Daos
             };
         }
 
-        public static void BindCustomerData(Dictionary<string, Label> customerValueLabels, BindingNavigator bindingNavigator)
+        public void BindCustomerData(Dictionary<string, Label> customerValueLabels, RichTextBox commentsRichTextbox, BindingNavigator bindingNavigator)
         {
-            Conn.Open(); // Open Connection
+            openConnectionIfClosed();
+
             string query = "SELECT * FROM CUSTOMERS";
             AdapterCustomer = new SqlDataAdapter(query, Conn);
             DatasetCustomer = new DataSet();
@@ -65,16 +61,17 @@ namespace Digital_Storehouse.Daos
             customerValueLabels["ADDRESS"].DataBindings.Add(new Binding("Text", BindsourceCustomer, "ADDRESS", true));
             customerValueLabels["CITY"].DataBindings.Add(new Binding("Text", BindsourceCustomer, "CITY", true));
             customerValueLabels["PHONE_NUMBER"].DataBindings.Add(new Binding("Text", BindsourceCustomer, "PHONE_NUMBER", true));
-            customerValueLabels["COMMENTS"].DataBindings.Add(new Binding("Text", BindsourceCustomer, "COMMENTS", true));
-            customerValueLabels["HAS_PHOTO"].DataBindings.Add(new Binding("Text", BindsourceCustomer, "HAS_PHOTO", true));
+            commentsRichTextbox.DataBindings.Clear(); //TODO temporary bug fix
+            commentsRichTextbox.DataBindings.Add(new Binding("Text", BindsourceCustomer, "COMMENTS", true));
 
             bindingNavigator.BindingSource = BindsourceCustomer;
             Conn.Close(); // Close Connection
         }
 
-        public static void BindOrderData(Dictionary<String, Label> orderValueLabels, BindingNavigator bindingNavigator)
+        public void BindOrderData(Dictionary<String, Label> orderValueLabels, BindingNavigator bindingNavigator)
         {
-            Conn.Open(); // Open Connection
+            openConnectionIfClosed();
+
             string query = "SELECT * FROM ORDERS";
             AdapterOrder = new SqlDataAdapter(query, Conn);
             DatasetOrder = new DataSet();
@@ -95,9 +92,10 @@ namespace Digital_Storehouse.Daos
             Conn.Close(); // Close Connection
         }
 
-        public static void BindProductsData(Dictionary<String, Label> productsValueLabels, BindingNavigator bindingNavigator)
+        public void BindProductsData(Dictionary<String, Label> productsValueLabels, BindingNavigator bindingNavigator)
         {
-            Conn.Open(); // Open Connection
+            openConnectionIfClosed();
+
             string query = "SELECT * FROM PRODUCTS";
             AdapterProduct = new SqlDataAdapter(query, Conn);
             DatasetProducts = new DataSet();
@@ -119,9 +117,10 @@ namespace Digital_Storehouse.Daos
             Conn.Close(); // Close Connection
         }
 
-        public static void BindOrdersProductsData(Dictionary<String, Label> ordersProductsValueLabels, BindingNavigator bindingNavigator)
+        public void BindOrdersProductsData(Dictionary<String, Label> ordersProductsValueLabels, BindingNavigator bindingNavigator)
         {
-            Conn.Open(); // Open Connection
+            openConnectionIfClosed();
+
             string query = "SELECT * FROM ORDERS_PRODUCTS";
             AdapterOrdersProducts = new SqlDataAdapter(query, Conn);
             DatasetOrdersProducts = new DataSet();
@@ -132,11 +131,84 @@ namespace Digital_Storehouse.Daos
                 DataSource = DatasetOrdersProducts.Tables[0].DefaultView
             };
 
-            ordersProductsValueLabels["ID_ORDER"].DataBindings.Add(new Binding("Text", BindsourceOrdersProducts, "ID_ORDER", true));
-            ordersProductsValueLabels["ID_PRODUCT"].DataBindings.Add(new Binding("Text", BindsourceOrdersProducts, "ID_PRODUCT", true));
+            ordersProductsValueLabels["ORDER_ID_F"].DataBindings.Add(new Binding("Text", BindsourceOrdersProducts, "ID_ORDER", true));
+            ordersProductsValueLabels["PRODUCT_ID_F"].DataBindings.Add(new Binding("Text", BindsourceOrdersProducts, "ID_PRODUCT", true));
             ordersProductsValueLabels["AMOUNT"].DataBindings.Add(new Binding("Text", BindsourceOrdersProducts, "AMOUNT", true));
 
             bindingNavigator.BindingSource = BindsourceOrdersProducts;
+            Conn.Close(); // Close Connection
+        }
+
+
+
+
+        public void BindOrdersHistoryDataGrid(DataGridView ordersHistory_dataGridView, string customerId)
+        {
+            int customerID;
+            if (! int.TryParse(customerId, out customerID)){
+                return;
+            }
+
+            openConnectionIfClosed();
+            
+            string query = 
+            "SELECT LAST_NAME, PAYMENT_METHOD, LABEL AS PRODUCT, SELLING_PRICE AS UNIT_PRICE, AMOUNT FROM CUSTOMERS "+ 
+            "INNER JOIN ORDERS "+
+                "ON CUSTOMERS.CUSTOMER_ID = ORDERS.CUSTOMER_ID " +
+            "INNER JOIN ORDERS_PRODUCTS "+
+                "ON ORDERS_PRODUCTS.ID_ORDER = ORDERS.ORDER_ID "+
+            "INNER JOIN PRODUCTS "+
+                "ON PRODUCTS.PRODUCT_ID = ORDERS_PRODUCTS.ID_PRODUCT "+
+            "WHERE CUSTOMERS.CUSTOMER_ID = "+customerId;
+            
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(query, Conn);
+                DataSet dataset = new DataSet();
+                adapter.Fill(dataset);
+                BindingSource bindingSource = new BindingSource();
+                bindingSource.DataSource = dataset.Tables[0].DefaultView;
+                ordersHistory_dataGridView.DataSource = bindingSource;
+            }
+            catch (SqlException e)
+            {
+                ViewMessages.ExceptionOccured(e);
+            }
+            Conn.Close(); // Close Connection
+        }
+
+        public void BindProductsHistoryDataGrid(DataGridView productsHistoryDataGridView, string productId)
+        {
+            int productID;
+            if (!int.TryParse(productId, out productID)){
+                return;
+            }
+
+            openConnectionIfClosed();
+
+            string query =
+                "SELECT LABEL AS PRODUCT, LAST_NAME AS ORDERED_BY, PAYMENT_METHOD, SELLING_PRICE AS UNIT_PRICE, AMOUNT FROM ORDERS " +
+                "INNER JOIN ORDERS_PRODUCTS " +
+                    "ON ORDERS_PRODUCTS.ID_ORDER = ORDERS.ORDER_ID " +
+                "INNER JOIN PRODUCTS " +
+                    "ON PRODUCTS.PRODUCT_ID = ORDERS_PRODUCTS.ID_PRODUCT " +
+                "INNER JOIN CUSTOMERS " +
+                    "ON CUSTOMERS.CUSTOMER_ID = ORDERS.CUSTOMER_ID " +
+                "WHERE ORDERS.ORDER_ID = " + productId;
+
+            try
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(query, Conn);
+                DataSet dataset = new DataSet();
+                adapter.Fill(dataset);
+                BindingSource bindingSource = new BindingSource();
+                bindingSource.DataSource = dataset.Tables[0].DefaultView;
+                productsHistoryDataGridView.DataSource = bindingSource;
+            }
+            catch (SqlException e)
+            {
+                ViewMessages.ExceptionOccured(e);
+            }
             Conn.Close(); // Close Connection
         }
 

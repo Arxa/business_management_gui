@@ -10,3 +10,8 @@ C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debu
 C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.NewCustomer.resources
 C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.UpdateCustomer.resources
 C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.NewOrder.resources
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.NewOrdersProducts.resources
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.NewProduct.resources
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.UpdateOrder.resources
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.UpdateProduct.resources
+C:\Users\arxa\Desktop\C# Projects\Digital_Storehouse\Digital_Storehouse\obj\Debug\Digital_Storehouse.Views.UpdateOrdersProducts.resources

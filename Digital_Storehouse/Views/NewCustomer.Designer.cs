@@ -61,9 +61,9 @@ namespace Digital_Storehouse.Views
             this.address_textbox = new Digital_Storehouse.Models.MyTextBox();
             this.phone_textbox = new Digital_Storehouse.Models.MyTextBox();
             this.city_textbox = new Digital_Storehouse.Models.MyTextBox();
-            this.comments_textbox = new Digital_Storehouse.Models.MyTextBox();
             this.photo_textbox = new Digital_Storehouse.Models.MyTextBox();
             this.removePhoto_buton = new System.Windows.Forms.Button();
+            this.comments_richTextbox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -199,7 +199,7 @@ namespace Digital_Storehouse.Views
             // 
             this.photo_label.AutoSize = true;
             this.photo_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.photo_label.Location = new System.Drawing.Point(39, 349);
+            this.photo_label.Location = new System.Drawing.Point(37, 415);
             this.photo_label.Name = "photo_label";
             this.photo_label.Size = new System.Drawing.Size(54, 13);
             this.photo_label.TabIndex = 51;
@@ -209,7 +209,7 @@ namespace Digital_Storehouse.Views
             // 
             this.choosePhoto_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.choosePhoto_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.choosePhoto_button.Location = new System.Drawing.Point(231, 344);
+            this.choosePhoto_button.Location = new System.Drawing.Point(229, 410);
             this.choosePhoto_button.Name = "choosePhoto_button";
             this.choosePhoto_button.Size = new System.Drawing.Size(99, 23);
             this.choosePhoto_button.TabIndex = 53;
@@ -223,7 +223,7 @@ namespace Digital_Storehouse.Views
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(42, 394);
+            this.pictureBox1.Location = new System.Drawing.Point(42, 452);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(230, 230);
             this.pictureBox1.TabIndex = 54;
@@ -353,7 +353,7 @@ namespace Digital_Storehouse.Views
             // phone_textbox
             // 
             this.phone_textbox.Location = new System.Drawing.Point(416, 208);
-            this.phone_textbox.MaxLength = 50;
+            this.phone_textbox.MaxLength = 10;
             this.phone_textbox.Name = "phone_textbox";
             this.phone_textbox.Size = new System.Drawing.Size(100, 20);
             this.phone_textbox.TabIndex = 71;
@@ -366,18 +366,10 @@ namespace Digital_Storehouse.Views
             this.city_textbox.Size = new System.Drawing.Size(100, 20);
             this.city_textbox.TabIndex = 72;
             // 
-            // comments_textbox
-            // 
-            this.comments_textbox.Location = new System.Drawing.Point(416, 256);
-            this.comments_textbox.MaxLength = 50;
-            this.comments_textbox.Name = "comments_textbox";
-            this.comments_textbox.Size = new System.Drawing.Size(100, 20);
-            this.comments_textbox.TabIndex = 73;
-            // 
             // photo_textbox
             // 
             this.photo_textbox.Enabled = false;
-            this.photo_textbox.Location = new System.Drawing.Point(110, 346);
+            this.photo_textbox.Location = new System.Drawing.Point(108, 412);
             this.photo_textbox.MaxLength = 50;
             this.photo_textbox.Name = "photo_textbox";
             this.photo_textbox.Size = new System.Drawing.Size(100, 20);
@@ -387,7 +379,7 @@ namespace Digital_Storehouse.Views
             // 
             this.removePhoto_buton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.removePhoto_buton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.removePhoto_buton.Location = new System.Drawing.Point(348, 343);
+            this.removePhoto_buton.Location = new System.Drawing.Point(346, 409);
             this.removePhoto_buton.Name = "removePhoto_buton";
             this.removePhoto_buton.Size = new System.Drawing.Size(75, 23);
             this.removePhoto_buton.TabIndex = 75;
@@ -395,15 +387,27 @@ namespace Digital_Storehouse.Views
             this.removePhoto_buton.UseVisualStyleBackColor = true;
             this.removePhoto_buton.Click += new System.EventHandler(this.removePhoto_buton_Click);
             // 
+            // comments_richTextbox
+            // 
+            this.comments_richTextbox.BackColor = System.Drawing.SystemColors.Menu;
+            this.comments_richTextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.comments_richTextbox.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.comments_richTextbox.Location = new System.Drawing.Point(322, 293);
+            this.comments_richTextbox.MaxLength = 500;
+            this.comments_richTextbox.Name = "comments_richTextbox";
+            this.comments_richTextbox.Size = new System.Drawing.Size(234, 72);
+            this.comments_richTextbox.TabIndex = 76;
+            this.comments_richTextbox.Text = "";
+            // 
             // NewCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
-            this.ClientSize = new System.Drawing.Size(543, 637);
+            this.ClientSize = new System.Drawing.Size(568, 694);
+            this.Controls.Add(this.comments_richTextbox);
             this.Controls.Add(this.removePhoto_buton);
             this.Controls.Add(this.photo_textbox);
-            this.Controls.Add(this.comments_textbox);
             this.Controls.Add(this.city_textbox);
             this.Controls.Add(this.phone_textbox);
             this.Controls.Add(this.address_textbox);
@@ -434,6 +438,8 @@ namespace Digital_Storehouse.Views
             this.Controls.Add(this.birthDate_label);
             this.Controls.Add(this.firstName_label);
             this.Controls.Add(this.lastName_label);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "NewCustomer";
             this.Text = "Add New Customer";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -478,8 +484,8 @@ namespace Digital_Storehouse.Views
         private MyTextBox address_textbox;
         private MyTextBox phone_textbox;
         private MyTextBox city_textbox;
-        private MyTextBox comments_textbox;
         private MyTextBox photo_textbox;
         private System.Windows.Forms.Button removePhoto_buton;
+        private System.Windows.Forms.RichTextBox comments_richTextbox;
     }
 }

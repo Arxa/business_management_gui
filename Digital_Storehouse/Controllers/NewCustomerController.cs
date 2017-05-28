@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,9 @@ namespace Digital_Storehouse.Controllers
 {
     public class NewCustomerController
     {
-        public static bool ValidateFields(Dictionary<string, MyTextBox> newCustomerTextboxes)
+        private static DatabaseConnection db = new DatabaseConnection();
+
+        public static bool ValidateFields(Dictionary<string, MyTextBox> newCustomerTextboxes, bool checkAfm)
         {
 
             // Check for AFM input
@@ -31,13 +34,16 @@ namespace Digital_Storehouse.Controllers
                 return false;
             }
 
-            if (NewCustomerDAO.afmExists(afm))
+            if (checkAfm)
             {
-                ViewMessages.AfmExists();
-                return false;
+                if (NewCustomerDAO.afmExists(afm))
+                {
+                    ViewMessages.AfmExists();
+                    return false;
+                }
             }
 
-
+            
 
             //Validate Last Name
             if (newCustomerTextboxes["LAST_NAME"].Text.Trim().Length < 3)
@@ -70,9 +76,9 @@ namespace Digital_Storehouse.Controllers
         }
 
         public static void AddNewCustomer(Dictionary<string, MyTextBox> newCustomerTextboxes, DateTime birthDate,
-            BindingNavigator bindingNavigatorCustomers, NewCustomer newCustomerForm)
+            RichTextBox comments_richTextbox, BindingNavigator bindingNavigatorCustomers, NewCustomer newCustomerForm)
         {
-            if (!ValidateFields(newCustomerTextboxes))
+            if (!ValidateFields(newCustomerTextboxes, true))
             {
                 return;
             }
@@ -82,19 +88,18 @@ namespace Digital_Storehouse.Controllers
             {
                 int last_page = bindingNavigatorCustomers.BindingSource.Count;
 
-                // TODO change this
-                string id = NewCustomerDAO.AddNewCustomer(newCustomerTextboxes, birthDate);
+                NewCustomerDAO.AddNewCustomer(newCustomerTextboxes, birthDate, comments_richTextbox);
 
                 foreach (KeyValuePair<string, Label> entry in App.GetCustomerLabels())
                 {
                     entry.Value.DataBindings.Clear();
                 }
 
-                AppDAO.BindCustomerData(App.GetCustomerLabels(), bindingNavigatorCustomers);
+                db.BindCustomerData(App.GetCustomerLabels(), App.getCommentsRichTextbox(), bindingNavigatorCustomers);
 
                 bindingNavigatorCustomers.BindingSource.Position = last_page;
 
-                ViewMessages.CustomerAdded();
+                // Added!
                 newCustomerForm.Close();
             }
             catch (SqlException e)
@@ -107,7 +112,8 @@ namespace Digital_Storehouse.Controllers
         {
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+                dialog.Filter =
+                    "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                 dialog.InitialDirectory = @"C:\";
                 dialog.Title = "Select New Customer's photo";
                 photoTextbox.Text = dialog.FileName;
@@ -129,6 +135,14 @@ namespace Digital_Storehouse.Controllers
         {
             pictureBox1.Image = null;
         }
- 
+
+        public static void loadPhotoAfterDialog(PictureBox pictureBox, string photoLabelPathText)
+        {
+            if (!photoLabelPathText.Equals(Container.EMPTY))
+            {
+                pictureBox.Image = Image.FromFile(photoLabelPathText);
+            }
+            
+        }
     }
 }

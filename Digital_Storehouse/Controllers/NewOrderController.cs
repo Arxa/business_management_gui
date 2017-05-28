@@ -13,28 +13,34 @@ namespace Digital_Storehouse.Controllers
 {
     public class NewOrderController
     {
+        private static DatabaseConnection db = new DatabaseConnection();
+
         public static void fillCustomerIdCombobox(ComboBox customerIdComboBox)
         {
-            foreach (var customerId in NewOrderDAO.getAllCustomerIds())
+            foreach (var customerId in NewOrderDAO.getCustomerIds())
             {
                 customerIdComboBox.Items.Add(customerId);
             }
         }
 
-        public static bool validateFields(Dictionary<String, MyTextBox> newOrderTextboxes)
+        public static bool validateFields(MyTextBox locationTextbox, ComboBox paymentMethod, ComboBox customerIdsComboBox)
         {
-            // TODO change to combobox
-            //if (newOrderTextboxes["PAYMENT METHOD"])
+            if (locationTextbox.Text.Equals("") || paymentMethod.GetItemText(paymentMethod.SelectedItem).Equals("") ||
+                customerIdsComboBox.GetItemText(customerIdsComboBox.SelectedItem).Equals(""))
+            {
+                ViewMessages.FillRequiredFields();
+                return false;
+            }
 
             return true;
         }
 
 
 
-        public static void addNewOrder(Dictionary<String, MyTextBox> newOrderTextboxes, DateTimePicker orderDatePicker, 
+        public static void addNewOrder(MyTextBox locationTextbox, ComboBox paymentMethod, DateTimePicker orderDatePicker, 
             ComboBox customerIdsComboBox, BindingNavigator bindingNavigatorOrders, NewOrder newOrderForm)
         {
-            if (! validateFields(newOrderTextboxes)){
+            if (! validateFields(locationTextbox, paymentMethod, customerIdsComboBox)){  
                 return;
             }
 
@@ -42,18 +48,20 @@ namespace Digital_Storehouse.Controllers
             {
                 int last_page = bindingNavigatorOrders.BindingSource.Count;
 
-                NewOrderDAO.addNewOrder(newOrderTextboxes, orderDatePicker.Value.Date, customerIdsComboBox.GetItemText(customerIdsComboBox.SelectedItem));
+                NewOrderDAO.addNewOrder(locationTextbox.Text, paymentMethod.GetItemText(paymentMethod.SelectedItem), 
+                    orderDatePicker.Value.Date, customerIdsComboBox.GetItemText(customerIdsComboBox.SelectedItem));
+
 
                 foreach (KeyValuePair<string, Label> entry in App.GetOrderLabels())
                 {
                     entry.Value.DataBindings.Clear();
                 }
 
-                AppDAO.BindOrderData(App.GetOrderLabels(), bindingNavigatorOrders);
+                db.BindOrderData(App.GetOrderLabels(), bindingNavigatorOrders);
 
                 bindingNavigatorOrders.BindingSource.Position = last_page;
 
-                ViewMessages.OrderAdded();
+                // Added!
                 newOrderForm.Close();
             }
             catch (SqlException e)

@@ -109,5 +109,74 @@ namespace Digital_Storehouse.Controllers
             MessageBox.Show("Order added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        public static void OrderUpdated()
+        {
+            MessageBox.Show("Order updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void ProductAdded()
+        {
+            MessageBox.Show("Product added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void ProductUpdated()
+        {
+            MessageBox.Show("Product updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void RelationshipAdded()
+        {
+            MessageBox.Show("Relationship added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void RelationshipUpdated()
+        {
+            MessageBox.Show("Relationship updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
+
+
+        public static void CannotDeleteOrder()
+        {
+            MessageBox.Show("This Order is referenced in another table, thus cannot be deleted. Please delete the referenced relationship first.",
+                "Couldn't Delete Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static void CannotDeleteProduct()
+        {
+            MessageBox.Show("This Product is referenced in another table, thus cannot be deleted. Please delete the referenced relationship first.",
+                "Couldn't Delete Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static void CannotDeleteCustomer()
+        {
+            MessageBox.Show("This Customer is referenced in another table, thus cannot be deleted. Please delete the referenced relationship first.",
+                "Couldn't Delete Customer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static void ReserveNotValid()
+        {
+            MessageBox.Show("Please use a valid integer number for 'RESERVE' field.",
+                "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static void SellingPriceNotValid()
+        {
+            MessageBox.Show("Please use a valid number for 'SELLING_PRICE' field.",
+                "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static void AmountNotValid()
+        {
+            MessageBox.Show("Please use a valid number for 'AMOUNT' field.",
+                "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public static void DuplicateKeyError()
+        {
+            MessageBox.Show("You cannot have two relationships of the same. Try to update it instead.",
+                "Relationship already exists", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

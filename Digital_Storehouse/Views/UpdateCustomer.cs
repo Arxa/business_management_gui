@@ -20,8 +20,10 @@ namespace Digital_Storehouse.Views
 
         private BindingNavigator bindingNavigator_Customers;
         private PictureBox pictureBoxCustomer;
+        private RichTextBox commentsRichTextBoxCustomer;
 
-        public UpdateCustomer(Dictionary<String, Label> customerValueLabels1, PictureBox pictureBox, BindingNavigator customersBindingNavigator1)
+        public UpdateCustomer(Dictionary<String, Label> customerValueLabels1, PictureBox pictureBox,
+                        RichTextBox commentsRichTextBox1, BindingNavigator customersBindingNavigator1)
         {
             // Load application icon
             this.Icon = Properties.Resources.app;
@@ -29,13 +31,13 @@ namespace Digital_Storehouse.Views
             bindingNavigator_Customers = customersBindingNavigator1;
             customerValueLabels = customerValueLabels1;
             pictureBoxCustomer = pictureBox;
+            commentsRichTextBoxCustomer = commentsRichTextBox1;
 
             InitializeComponent();
 
             initializeDictionary();
-            initializeFieldsWithCustomerValues();   
+            initializeFields();   
 
-            UpdateCustomerController.syncCustomerUpdatedForm(photo_textbox, removePhoto_button);
         }
 
         
@@ -48,23 +50,19 @@ namespace Digital_Storehouse.Views
         
         private void updateCustomer_button_Click(object sender, EventArgs e)
         {
-            UpdateCustomerController.UpdateCustomer(updateCustomerTextboxes, Int32.Parse(customerValueLabels["CUSTOMER_ID"].Text), 
-                pictureBoxCustomer, bindingNavigator_Customers, this);   
+            UpdateCustomerController.UpdateCustomer(pictureBox1, updateCustomerTextboxes, customerValueLabels, 
+                pictureBoxCustomer, comments_richTextbox, bindingNavigator_Customers, this);   
         }
 
         private void choosePhoto_button_Click(object sender, EventArgs e)
         {
-            NewCustomerController.ShowPhotoDialogChooser(openFileDialog1, updateCustomerTextboxes["PHOTO"]);
-            pictureBox1.Image = Image.FromFile(updateCustomerTextboxes["PHOTO"].Text);
-            UpdateCustomerController.syncCustomerUpdatedForm(photo_textbox, removePhoto_button);
+            UpdateCustomerController.ShowPhotoDialogChooser(openFileDialog1, updateCustomerTextboxes["PHOTO"]);
+            UpdateCustomerController.loadPhotoAfterDialog(pictureBox1, photo_textbox.Text);
         }
 
         // Fields have been edited
         // ----------------------
-        public void lastName_textbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            updateCustomer_button.Enabled = true;
-        }
+       
 
         private void birthDate_picker_ValueChanged(object sender, EventArgs e)
         {
@@ -76,7 +74,6 @@ namespace Digital_Storehouse.Views
         {
             UpdateCustomerController.removePhoto(pictureBox1);
             photo_textbox.Text = Models.Container.EMPTY;
-            UpdateCustomerController.syncCustomerUpdatedForm(photo_textbox, removePhoto_button);
         }
 
         public void initializeDictionary()
@@ -89,12 +86,11 @@ namespace Digital_Storehouse.Views
             updateCustomerTextboxes["ADDRESS"] = address_textbox;
             updateCustomerTextboxes["CITY"] = city_textbox;
             updateCustomerTextboxes["PHONE_NUMBER"] = phone_textbox;
-            updateCustomerTextboxes["COMMENTS"] = comments_textbox;
             updateCustomerTextboxes["PHOTO"] = photo_textbox;
             
         }
 
-        public void initializeFieldsWithCustomerValues()
+        public void initializeFields()
         {
             lastName_textbox.Text = customerValueLabels["LAST_NAME"].Text;
             firstName_textbox.Text = customerValueLabels["FIRST_NAME"].Text;
@@ -104,11 +100,15 @@ namespace Digital_Storehouse.Views
             address_textbox.Text = customerValueLabels["ADDRESS"].Text;
             city_textbox.Text = customerValueLabels["CITY"].Text;
             phone_textbox.Text = customerValueLabels["PHONE_NUMBER"].Text;
-            comments_textbox.Text = customerValueLabels["COMMENTS"].Text;
-            hasPhoto_label.Text = customerValueLabels["HAS_PHOTO"].Text;
+            comments_richTextbox.Text = commentsRichTextBoxCustomer.Text;
 
             AppDAO.LoadCustomerPhoto(pictureBox1, Int32.Parse(customerValueLabels["CUSTOMER_ID"].Text));
             birthDate_picker.Text = customerValueLabels["BIRTH_DATE"].Text;
+        }
+
+        private void lastName_textbox_TextChanged(object sender, EventArgs e)
+        {
+            updateCustomer_button.Enabled = true;
         }
     }
 }

@@ -11,8 +11,16 @@ namespace Digital_Storehouse.Controllers
 {
     public class AppController
     {
-        public static void DeleteCustomer(Dictionary<string, Label> customerValueLabels, BindingNavigator bindingNavigatorCustomer)
+        private static DatabaseConnection db = new DatabaseConnection();
+
+        public static void DeleteCustomer(Dictionary<string, Label> customerValueLabels, RichTextBox commentsRichTextBox, BindingNavigator bindingNavigatorCustomer)
         {
+            if (!customerCanBeDeleted(customerValueLabels["CUSTOMER_ID"].Text))
+            {
+                ViewMessages.CannotDeleteCustomer();
+                return;
+            }
+
             if (ViewMessages.DeleteCustomerDialog() == DialogResult.No)
             {
                 return;
@@ -22,11 +30,17 @@ namespace Digital_Storehouse.Controllers
             {
                 entry.Value.DataBindings.Clear();
             }
-            AppDAO.BindCustomerData(customerValueLabels, bindingNavigatorCustomer);
+            db.BindCustomerData(customerValueLabels, commentsRichTextBox, bindingNavigatorCustomer);
         }
 
         public static void DeleteOrder(Dictionary<string, Label> orderValueLabels, BindingNavigator bindingNavigatorOrder)
         {
+            if (! orderCanBeDeleted(orderValueLabels["ORDER_ID"].Text))
+            {
+                ViewMessages.CannotDeleteOrder();
+                return;
+            }
+
             if (ViewMessages.DeleteOrderDialog() == DialogResult.No)
             {
                 return;
@@ -36,11 +50,17 @@ namespace Digital_Storehouse.Controllers
             {
                 entry.Value.DataBindings.Clear();
             }
-            AppDAO.BindOrderData(orderValueLabels, bindingNavigatorOrder);
+            db.BindOrderData(orderValueLabels, bindingNavigatorOrder);
         }
 
         public static void DeleteProduct(Dictionary<string, Label> productValueLabels, BindingNavigator bindingNavigatorProduct)
         {
+            if (!productCanBeDeleted(productValueLabels["PRODUCT_ID"].Text))
+            {
+                ViewMessages.CannotDeleteProduct();
+                return;
+            }
+
             if (ViewMessages.DeleteProductDialog() == DialogResult.No)
             {
                 return;
@@ -50,7 +70,7 @@ namespace Digital_Storehouse.Controllers
             {
                 entry.Value.DataBindings.Clear();
             }
-            AppDAO.BindProductsData(productValueLabels, bindingNavigatorProduct);
+            db.BindProductsData(productValueLabels, bindingNavigatorProduct);
         }
 
         public static void DeleteRelationship(Dictionary<string, Label> ordersProductsValueLabels, BindingNavigator bindingNavigatorOrdersProducts)
@@ -59,12 +79,12 @@ namespace Digital_Storehouse.Controllers
             {
                 return;
             }
-            AppDAO.DeleteRelationship(Int32.Parse(ordersProductsValueLabels["ID_ORDER"].Text));
+            AppDAO.DeleteRelationship(Int32.Parse(ordersProductsValueLabels["ORDER_ID_F"].Text));
             foreach (KeyValuePair<string, Label> entry in ordersProductsValueLabels)
             {
                 entry.Value.DataBindings.Clear();
             }
-            AppDAO.BindOrdersProductsData(ordersProductsValueLabels, bindingNavigatorOrdersProducts);
+            db.BindOrdersProductsData(ordersProductsValueLabels, bindingNavigatorOrdersProducts);
         }
 
 
@@ -119,9 +139,8 @@ namespace Digital_Storehouse.Controllers
         }
 
 
-        public static void syncOrdersTab(BindingSource ordersBindSource,
-            Dictionary<String, Label> ordersValueLabels,
-            Button deleteOrderButton, Button updateOrderButton)
+        public static void syncOrdersTab(BindingSource ordersBindSource,Dictionary<String, Label> ordersValueLabels,
+                                    Button deleteOrderButton, Button updateOrderButton)
         {
             if (ordersBindSource == null)
             {
@@ -131,7 +150,7 @@ namespace Digital_Storehouse.Controllers
 
             if (ordersBindSource.Count == 0)
             {
-                foreach (KeyValuePair<String, Label> entry in ordersBindSource)
+                foreach (KeyValuePair<String, Label> entry in ordersValueLabels)
                 {
                     entry.Value.Text = "XXX";
                 }
@@ -155,7 +174,7 @@ namespace Digital_Storehouse.Controllers
 
             if (ordersProductsBindSource.Count == 0)
             {
-                foreach (KeyValuePair<String, Label> entry in ordersProductsBindSource)
+                foreach (KeyValuePair<String, Label> entry in ordersProductsValueLabels)
                 {
                     entry.Value.Text = "XXX";
                 }
@@ -175,10 +194,55 @@ namespace Digital_Storehouse.Controllers
             form.Show();
         }
 
-        public static void OpenUpdateCustomerForm(Dictionary<string, Label> customerValueLabels, PictureBox pictureBox, BindingNavigator bindingNavigatorCustomers)
+        public static void OpenUpdateCustomerForm(Dictionary<string, Label> customerValueLabels, PictureBox pictureBox, 
+                                        RichTextBox commentsRichTextBox, BindingNavigator bindingNavigatorCustomers)
         {
-            UpdateCustomer form = new UpdateCustomer(customerValueLabels, pictureBox, bindingNavigatorCustomers);
+            UpdateCustomer form = new UpdateCustomer(customerValueLabels, pictureBox, commentsRichTextBox, bindingNavigatorCustomers);
             form.Show();
+        }
+
+        public static void OpenUpdateOrderForm(Dictionary<string, Label> orderValueLabels, BindingNavigator bindingNavigatorCustomers)
+        {
+            UpdateOrder form = new UpdateOrder(orderValueLabels, bindingNavigatorCustomers);
+            form.Show();
+        }
+
+
+        
+        public static bool orderCanBeDeleted(string orderId)
+        {
+            foreach (var id in NewOrdersProductsDAO.getOrderIdsInOrdersProductsTable())
+            {
+                if (id.Equals(orderId))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool productCanBeDeleted(string productId)
+        {
+            foreach (var id in NewOrdersProductsDAO.getProductIdsInOrdersProductsTable())
+            {
+                if (id.Equals(productId))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool customerCanBeDeleted(string customerId)
+        {
+            foreach (var id in NewOrderDAO.getCustomerIdsInOrdersProductsTable())
+            {
+                if (id.Equals(customerId))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

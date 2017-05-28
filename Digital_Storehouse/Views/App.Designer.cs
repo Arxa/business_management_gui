@@ -30,9 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(App));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.customers_tab = new System.Windows.Forms.TabPage();
-            this.hasPhoto_label = new System.Windows.Forms.Label();
+            this.comments_richTextbox = new System.Windows.Forms.RichTextBox();
             this.bindingNavigator_Customer = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem4 = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem4 = new System.Windows.Forms.ToolStripButton();
@@ -47,7 +51,6 @@
             this.insertCustomer_button = new System.Windows.Forms.Button();
             this.updateCustomer_button = new System.Windows.Forms.Button();
             this.deleteCustomer_button = new System.Windows.Forms.Button();
-            this.comments_value_label = new System.Windows.Forms.Label();
             this.age_value_label = new System.Windows.Forms.Label();
             this.afm_value_label = new System.Windows.Forms.Label();
             this.address_value_label = new System.Windows.Forms.Label();
@@ -70,7 +73,7 @@
             this.lastName_label = new System.Windows.Forms.Label();
             this.customerId_label = new System.Windows.Forms.Label();
             this.orders_tab = new System.Windows.Forms.TabPage();
-            this.customer_id_F_label = new System.Windows.Forms.Label();
+            this.customerId_F_value_label = new System.Windows.Forms.Label();
             this.addOrder_button = new System.Windows.Forms.Button();
             this.updateOrder_button = new System.Windows.Forms.Button();
             this.deleteOrder_button = new System.Windows.Forms.Button();
@@ -120,8 +123,8 @@
             this.label_label = new System.Windows.Forms.Label();
             this.productId_label = new System.Windows.Forms.Label();
             this.ordersCustomers_tab = new System.Windows.Forms.TabPage();
-            this.productId_F_label = new System.Windows.Forms.Label();
-            this.orderId_F_label = new System.Windows.Forms.Label();
+            this.productId_F_value_label = new System.Windows.Forms.Label();
+            this.orderId_F_value_label = new System.Windows.Forms.Label();
             this.addRelationship_button = new System.Windows.Forms.Button();
             this.updateRelationship_button = new System.Windows.Forms.Button();
             this.deleteRelationship_button = new System.Windows.Forms.Button();
@@ -139,6 +142,12 @@
             this.amount_label = new System.Windows.Forms.Label();
             this.idProduct_label = new System.Windows.Forms.Label();
             this.idOrder_label = new System.Windows.Forms.Label();
+            this.ordersHistory_tab = new System.Windows.Forms.TabPage();
+            this.ordersHistoryTotal_label = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ordersHistory_dataGridView = new System.Windows.Forms.DataGridView();
+            this.customerIds_combobox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
@@ -174,6 +183,14 @@
             this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.storehouseDataSet1 = new Digital_Storehouse.StorehouseDataSet1();
+            this.storehouseDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.productsHistory_tab = new System.Windows.Forms.TabPage();
+            this.productsHistoryTotal_label = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.productsHistory_datagrid = new System.Windows.Forms.DataGridView();
+            this.productIds_combobox = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.customers_tab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator_Customer)).BeginInit();
@@ -188,30 +205,40 @@
             this.ordersCustomers_tab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator_OrdersProducts)).BeginInit();
             this.bindingNavigator_OrdersProducts.SuspendLayout();
+            this.ordersHistory_tab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersHistory_dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storehouseDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storehouseDataSet1BindingSource)).BeginInit();
+            this.productsHistory_tab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productsHistory_datagrid)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.customers_tab);
             this.tabControl1.Controls.Add(this.orders_tab);
             this.tabControl1.Controls.Add(this.products_tab);
             this.tabControl1.Controls.Add(this.ordersCustomers_tab);
+            this.tabControl1.Controls.Add(this.ordersHistory_tab);
+            this.tabControl1.Controls.Add(this.productsHistory_tab);
+            this.tabControl1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.tabControl1.Location = new System.Drawing.Point(2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 517);
+            this.tabControl1.Size = new System.Drawing.Size(783, 517);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
             // customers_tab
             // 
             this.customers_tab.BackColor = System.Drawing.SystemColors.Menu;
-            this.customers_tab.Controls.Add(this.hasPhoto_label);
+            this.customers_tab.Controls.Add(this.comments_richTextbox);
             this.customers_tab.Controls.Add(this.bindingNavigator_Customer);
             this.customers_tab.Controls.Add(this.pictureBox_customer);
             this.customers_tab.Controls.Add(this.insertCustomer_button);
             this.customers_tab.Controls.Add(this.updateCustomer_button);
             this.customers_tab.Controls.Add(this.deleteCustomer_button);
-            this.customers_tab.Controls.Add(this.comments_value_label);
             this.customers_tab.Controls.Add(this.age_value_label);
             this.customers_tab.Controls.Add(this.afm_value_label);
             this.customers_tab.Controls.Add(this.address_value_label);
@@ -234,21 +261,24 @@
             this.customers_tab.Controls.Add(this.lastName_label);
             this.customers_tab.Controls.Add(this.customerId_label);
             this.customers_tab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.customers_tab.Location = new System.Drawing.Point(4, 22);
+            this.customers_tab.Location = new System.Drawing.Point(4, 27);
             this.customers_tab.Name = "customers_tab";
             this.customers_tab.Padding = new System.Windows.Forms.Padding(3);
-            this.customers_tab.Size = new System.Drawing.Size(792, 491);
+            this.customers_tab.Size = new System.Drawing.Size(775, 486);
             this.customers_tab.TabIndex = 0;
             this.customers_tab.Text = "Customers";
             // 
-            // hasPhoto_label
+            // comments_richTextbox
             // 
-            this.hasPhoto_label.AutoSize = true;
-            this.hasPhoto_label.ForeColor = System.Drawing.SystemColors.Menu;
-            this.hasPhoto_label.Location = new System.Drawing.Point(619, 15);
-            this.hasPhoto_label.Name = "hasPhoto_label";
-            this.hasPhoto_label.Size = new System.Drawing.Size(0, 13);
-            this.hasPhoto_label.TabIndex = 45;
+            this.comments_richTextbox.BackColor = System.Drawing.SystemColors.Menu;
+            this.comments_richTextbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.comments_richTextbox.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.comments_richTextbox.Location = new System.Drawing.Point(258, 261);
+            this.comments_richTextbox.Name = "comments_richTextbox";
+            this.comments_richTextbox.ReadOnly = true;
+            this.comments_richTextbox.Size = new System.Drawing.Size(195, 68);
+            this.comments_richTextbox.TabIndex = 45;
+            this.comments_richTextbox.Text = "";
             // 
             // bindingNavigator_Customer
             // 
@@ -283,6 +313,7 @@
             this.bindingNavigatorCountItem4.Size = new System.Drawing.Size(35, 22);
             this.bindingNavigatorCountItem4.Text = "of {0}";
             this.bindingNavigatorCountItem4.ToolTipText = "Total number of items";
+            this.bindingNavigatorCountItem4.TextChanged += new System.EventHandler(this.bindingNavigatorCountItem4_TextChanged);
             // 
             // bindingNavigatorMoveFirstItem4
             // 
@@ -398,16 +429,6 @@
             this.deleteCustomer_button.Text = "Delete this Customer";
             this.deleteCustomer_button.UseVisualStyleBackColor = false;
             this.deleteCustomer_button.Click += new System.EventHandler(this.deleteCustomer_button_Click);
-            // 
-            // comments_value_label
-            // 
-            this.comments_value_label.AutoSize = true;
-            this.comments_value_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.comments_value_label.Location = new System.Drawing.Point(255, 263);
-            this.comments_value_label.Name = "comments_value_label";
-            this.comments_value_label.Size = new System.Drawing.Size(28, 13);
-            this.comments_value_label.TabIndex = 26;
-            this.comments_value_label.Text = "XXX";
             // 
             // age_value_label
             // 
@@ -623,7 +644,7 @@
             // orders_tab
             // 
             this.orders_tab.BackColor = System.Drawing.SystemColors.Menu;
-            this.orders_tab.Controls.Add(this.customer_id_F_label);
+            this.orders_tab.Controls.Add(this.customerId_F_value_label);
             this.orders_tab.Controls.Add(this.addOrder_button);
             this.orders_tab.Controls.Add(this.updateOrder_button);
             this.orders_tab.Controls.Add(this.deleteOrder_button);
@@ -637,21 +658,21 @@
             this.orders_tab.Controls.Add(this.orderData_label);
             this.orders_tab.Controls.Add(this.paymentMethod_label);
             this.orders_tab.Controls.Add(this.orderId_label);
-            this.orders_tab.Location = new System.Drawing.Point(4, 22);
+            this.orders_tab.Location = new System.Drawing.Point(4, 27);
             this.orders_tab.Name = "orders_tab";
             this.orders_tab.Padding = new System.Windows.Forms.Padding(3);
-            this.orders_tab.Size = new System.Drawing.Size(792, 491);
+            this.orders_tab.Size = new System.Drawing.Size(775, 486);
             this.orders_tab.TabIndex = 2;
             this.orders_tab.Text = "Orders";
             // 
-            // customer_id_F_label
+            // customerId_F_value_label
             // 
-            this.customer_id_F_label.AutoSize = true;
-            this.customer_id_F_label.Location = new System.Drawing.Point(234, 175);
-            this.customer_id_F_label.Name = "customer_id_F_label";
-            this.customer_id_F_label.Size = new System.Drawing.Size(28, 13);
-            this.customer_id_F_label.TabIndex = 91;
-            this.customer_id_F_label.Text = "XXX";
+            this.customerId_F_value_label.AutoSize = true;
+            this.customerId_F_value_label.Location = new System.Drawing.Point(234, 175);
+            this.customerId_F_value_label.Name = "customerId_F_value_label";
+            this.customerId_F_value_label.Size = new System.Drawing.Size(34, 15);
+            this.customerId_F_value_label.TabIndex = 91;
+            this.customerId_F_value_label.Text = "XXX";
             // 
             // addOrder_button
             // 
@@ -680,6 +701,7 @@
             this.updateOrder_button.TabIndex = 89;
             this.updateOrder_button.Text = "Update Order";
             this.updateOrder_button.UseVisualStyleBackColor = false;
+            this.updateOrder_button.Click += new System.EventHandler(this.updateOrder_button_Click);
             // 
             // deleteOrder_button
             // 
@@ -729,6 +751,7 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(35, 22);
             this.toolStripLabel1.Text = "of {0}";
             this.toolStripLabel1.ToolTipText = "Total number of items";
+            this.toolStripLabel1.TextChanged += new System.EventHandler(this.toolStripLabel1_TextChanged);
             // 
             // toolStripButton1
             // 
@@ -795,7 +818,7 @@
             this.deliveryLocation_value_label.AutoSize = true;
             this.deliveryLocation_value_label.Location = new System.Drawing.Point(588, 138);
             this.deliveryLocation_value_label.Name = "deliveryLocation_value_label";
-            this.deliveryLocation_value_label.Size = new System.Drawing.Size(28, 13);
+            this.deliveryLocation_value_label.Size = new System.Drawing.Size(34, 15);
             this.deliveryLocation_value_label.TabIndex = 81;
             this.deliveryLocation_value_label.Text = "XXX";
             // 
@@ -804,7 +827,7 @@
             this.orderDate_value_label.AutoSize = true;
             this.orderDate_value_label.Location = new System.Drawing.Point(234, 138);
             this.orderDate_value_label.Name = "orderDate_value_label";
-            this.orderDate_value_label.Size = new System.Drawing.Size(28, 13);
+            this.orderDate_value_label.Size = new System.Drawing.Size(34, 15);
             this.orderDate_value_label.TabIndex = 80;
             this.orderDate_value_label.Text = "XXX";
             // 
@@ -813,7 +836,7 @@
             this.paymentMethod_value_label.AutoSize = true;
             this.paymentMethod_value_label.Location = new System.Drawing.Point(588, 100);
             this.paymentMethod_value_label.Name = "paymentMethod_value_label";
-            this.paymentMethod_value_label.Size = new System.Drawing.Size(28, 13);
+            this.paymentMethod_value_label.Size = new System.Drawing.Size(34, 15);
             this.paymentMethod_value_label.TabIndex = 79;
             this.paymentMethod_value_label.Text = "XXX";
             // 
@@ -822,7 +845,7 @@
             this.orderId_value_label.AutoSize = true;
             this.orderId_value_label.Location = new System.Drawing.Point(234, 100);
             this.orderId_value_label.Name = "orderId_value_label";
-            this.orderId_value_label.Size = new System.Drawing.Size(28, 13);
+            this.orderId_value_label.Size = new System.Drawing.Size(34, 15);
             this.orderId_value_label.TabIndex = 78;
             this.orderId_value_label.Text = "XXX";
             // 
@@ -896,10 +919,10 @@
             this.products_tab.Controls.Add(this.label_label);
             this.products_tab.Controls.Add(this.productId_label);
             this.products_tab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.products_tab.Location = new System.Drawing.Point(4, 22);
+            this.products_tab.Location = new System.Drawing.Point(4, 27);
             this.products_tab.Name = "products_tab";
             this.products_tab.Padding = new System.Windows.Forms.Padding(3);
-            this.products_tab.Size = new System.Drawing.Size(792, 491);
+            this.products_tab.Size = new System.Drawing.Size(775, 486);
             this.products_tab.TabIndex = 1;
             this.products_tab.Text = "Products";
             // 
@@ -916,6 +939,7 @@
             this.addProduct_button.TabIndex = 75;
             this.addProduct_button.Text = "Add New Product";
             this.addProduct_button.UseVisualStyleBackColor = false;
+            this.addProduct_button.Click += new System.EventHandler(this.addProduct_button_Click);
             // 
             // updateProduct_button
             // 
@@ -931,6 +955,7 @@
             this.updateProduct_button.TabIndex = 74;
             this.updateProduct_button.Text = "Update Product";
             this.updateProduct_button.UseVisualStyleBackColor = false;
+            this.updateProduct_button.Click += new System.EventHandler(this.updateProduct_button_Click);
             // 
             // deleteProduct_button
             // 
@@ -981,6 +1006,7 @@
             this.bindingNavigatorCountItem5.Size = new System.Drawing.Size(35, 22);
             this.bindingNavigatorCountItem5.Text = "of {0}";
             this.bindingNavigatorCountItem5.ToolTipText = "Total number of items";
+            this.bindingNavigatorCountItem5.TextChanged += new System.EventHandler(this.bindingNavigatorCountItem5_TextChanged);
             // 
             // bindingNavigatorMoveFirstItem5
             // 
@@ -1165,8 +1191,8 @@
             // ordersCustomers_tab
             // 
             this.ordersCustomers_tab.BackColor = System.Drawing.SystemColors.Menu;
-            this.ordersCustomers_tab.Controls.Add(this.productId_F_label);
-            this.ordersCustomers_tab.Controls.Add(this.orderId_F_label);
+            this.ordersCustomers_tab.Controls.Add(this.productId_F_value_label);
+            this.ordersCustomers_tab.Controls.Add(this.orderId_F_value_label);
             this.ordersCustomers_tab.Controls.Add(this.addRelationship_button);
             this.ordersCustomers_tab.Controls.Add(this.updateRelationship_button);
             this.ordersCustomers_tab.Controls.Add(this.deleteRelationship_button);
@@ -1175,29 +1201,29 @@
             this.ordersCustomers_tab.Controls.Add(this.amount_label);
             this.ordersCustomers_tab.Controls.Add(this.idProduct_label);
             this.ordersCustomers_tab.Controls.Add(this.idOrder_label);
-            this.ordersCustomers_tab.Location = new System.Drawing.Point(4, 22);
+            this.ordersCustomers_tab.Location = new System.Drawing.Point(4, 27);
             this.ordersCustomers_tab.Name = "ordersCustomers_tab";
-            this.ordersCustomers_tab.Size = new System.Drawing.Size(792, 491);
+            this.ordersCustomers_tab.Size = new System.Drawing.Size(775, 486);
             this.ordersCustomers_tab.TabIndex = 3;
             this.ordersCustomers_tab.Text = "Orders-Products";
             // 
-            // productId_F_label
+            // productId_F_value_label
             // 
-            this.productId_F_label.AutoSize = true;
-            this.productId_F_label.Location = new System.Drawing.Point(224, 156);
-            this.productId_F_label.Name = "productId_F_label";
-            this.productId_F_label.Size = new System.Drawing.Size(28, 13);
-            this.productId_F_label.TabIndex = 105;
-            this.productId_F_label.Text = "XXX";
+            this.productId_F_value_label.AutoSize = true;
+            this.productId_F_value_label.Location = new System.Drawing.Point(224, 156);
+            this.productId_F_value_label.Name = "productId_F_value_label";
+            this.productId_F_value_label.Size = new System.Drawing.Size(34, 15);
+            this.productId_F_value_label.TabIndex = 105;
+            this.productId_F_value_label.Text = "XXX";
             // 
-            // orderId_F_label
+            // orderId_F_value_label
             // 
-            this.orderId_F_label.AutoSize = true;
-            this.orderId_F_label.Location = new System.Drawing.Point(224, 100);
-            this.orderId_F_label.Name = "orderId_F_label";
-            this.orderId_F_label.Size = new System.Drawing.Size(28, 13);
-            this.orderId_F_label.TabIndex = 104;
-            this.orderId_F_label.Text = "XXX";
+            this.orderId_F_value_label.AutoSize = true;
+            this.orderId_F_value_label.Location = new System.Drawing.Point(224, 100);
+            this.orderId_F_value_label.Name = "orderId_F_value_label";
+            this.orderId_F_value_label.Size = new System.Drawing.Size(34, 15);
+            this.orderId_F_value_label.TabIndex = 104;
+            this.orderId_F_value_label.Text = "XXX";
             // 
             // addRelationship_button
             // 
@@ -1211,6 +1237,7 @@
             this.addRelationship_button.TabIndex = 103;
             this.addRelationship_button.Text = "Add New Relationship";
             this.addRelationship_button.UseVisualStyleBackColor = false;
+            this.addRelationship_button.Click += new System.EventHandler(this.addRelationship_button_Click);
             // 
             // updateRelationship_button
             // 
@@ -1225,6 +1252,7 @@
             this.updateRelationship_button.TabIndex = 102;
             this.updateRelationship_button.Text = "Update Relationship";
             this.updateRelationship_button.UseVisualStyleBackColor = false;
+            this.updateRelationship_button.Click += new System.EventHandler(this.updateRelationship_button_Click);
             // 
             // deleteRelationship_button
             // 
@@ -1257,7 +1285,7 @@
             this.toolStripButton7,
             this.toolStripButton8,
             this.toolStripSeparator6});
-            this.bindingNavigator_OrdersProducts.Location = new System.Drawing.Point(3, 0);
+            this.bindingNavigator_OrdersProducts.Location = new System.Drawing.Point(0, 0);
             this.bindingNavigator_OrdersProducts.MoveFirstItem = this.toolStripButton5;
             this.bindingNavigator_OrdersProducts.MoveLastItem = this.toolStripButton8;
             this.bindingNavigator_OrdersProducts.MoveNextItem = this.toolStripButton7;
@@ -1274,6 +1302,7 @@
             this.toolStripLabel2.Size = new System.Drawing.Size(35, 22);
             this.toolStripLabel2.Text = "of {0}";
             this.toolStripLabel2.ToolTipText = "Total number of items";
+            this.toolStripLabel2.TextChanged += new System.EventHandler(this.toolStripLabel2_TextChanged);
             // 
             // toolStripButton5
             // 
@@ -1340,7 +1369,7 @@
             this.amount_value_label.AutoSize = true;
             this.amount_value_label.Location = new System.Drawing.Point(224, 208);
             this.amount_value_label.Name = "amount_value_label";
-            this.amount_value_label.Size = new System.Drawing.Size(28, 13);
+            this.amount_value_label.Size = new System.Drawing.Size(34, 15);
             this.amount_value_label.TabIndex = 96;
             this.amount_value_label.Text = "XXX";
             // 
@@ -1373,6 +1402,82 @@
             this.idOrder_label.Size = new System.Drawing.Size(75, 13);
             this.idOrder_label.TabIndex = 87;
             this.idOrder_label.Text = "ORDER_ID:";
+            // 
+            // ordersHistory_tab
+            // 
+            this.ordersHistory_tab.Controls.Add(this.ordersHistoryTotal_label);
+            this.ordersHistory_tab.Controls.Add(this.label2);
+            this.ordersHistory_tab.Controls.Add(this.ordersHistory_dataGridView);
+            this.ordersHistory_tab.Controls.Add(this.customerIds_combobox);
+            this.ordersHistory_tab.Controls.Add(this.label1);
+            this.ordersHistory_tab.Location = new System.Drawing.Point(4, 27);
+            this.ordersHistory_tab.Name = "ordersHistory_tab";
+            this.ordersHistory_tab.Padding = new System.Windows.Forms.Padding(3);
+            this.ordersHistory_tab.Size = new System.Drawing.Size(775, 486);
+            this.ordersHistory_tab.TabIndex = 4;
+            this.ordersHistory_tab.Text = "Orders History";
+            this.ordersHistory_tab.UseVisualStyleBackColor = true;
+            // 
+            // ordersHistoryTotal_label
+            // 
+            this.ordersHistoryTotal_label.AutoSize = true;
+            this.ordersHistoryTotal_label.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.ordersHistoryTotal_label.Location = new System.Drawing.Point(428, 326);
+            this.ordersHistoryTotal_label.Name = "ordersHistoryTotal_label";
+            this.ordersHistoryTotal_label.Size = new System.Drawing.Size(0, 19);
+            this.ordersHistoryTotal_label.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label2.Location = new System.Drawing.Point(236, 326);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(165, 19);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Customer\'s Total Amount:";
+            // 
+            // ordersHistory_dataGridView
+            // 
+            this.ordersHistory_dataGridView.AllowUserToAddRows = false;
+            this.ordersHistory_dataGridView.AllowUserToDeleteRows = false;
+            this.ordersHistory_dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ordersHistory_dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            this.ordersHistory_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ordersHistory_dataGridView.Location = new System.Drawing.Point(56, 116);
+            this.ordersHistory_dataGridView.Name = "ordersHistory_dataGridView";
+            this.ordersHistory_dataGridView.ReadOnly = true;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ordersHistory_dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            this.ordersHistory_dataGridView.Size = new System.Drawing.Size(668, 150);
+            this.ordersHistory_dataGridView.TabIndex = 2;
+            // 
+            // customerIds_combobox
+            // 
+            this.customerIds_combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customerIds_combobox.FormattingEnabled = true;
+            this.customerIds_combobox.Location = new System.Drawing.Point(417, 53);
+            this.customerIds_combobox.Name = "customerIds_combobox";
+            this.customerIds_combobox.Size = new System.Drawing.Size(37, 23);
+            this.customerIds_combobox.TabIndex = 1;
+            this.customerIds_combobox.TextChanged += new System.EventHandler(this.customerIds_combobox_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label1.Location = new System.Drawing.Point(271, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 19);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Choose Customer";
             // 
             // bindingNavigatorCountItem1
             // 
@@ -1637,12 +1742,101 @@
             this.bindingNavigatorSeparator7.Name = "bindingNavigatorSeparator7";
             this.bindingNavigatorSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
+            // storehouseDataSet1
+            // 
+            this.storehouseDataSet1.DataSetName = "StorehouseDataSet1";
+            this.storehouseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // storehouseDataSet1BindingSource
+            // 
+            this.storehouseDataSet1BindingSource.DataSource = this.storehouseDataSet1;
+            this.storehouseDataSet1BindingSource.Position = 0;
+            // 
+            // productsHistory_tab
+            // 
+            this.productsHistory_tab.Controls.Add(this.productsHistoryTotal_label);
+            this.productsHistory_tab.Controls.Add(this.label4);
+            this.productsHistory_tab.Controls.Add(this.productsHistory_datagrid);
+            this.productsHistory_tab.Controls.Add(this.productIds_combobox);
+            this.productsHistory_tab.Controls.Add(this.label5);
+            this.productsHistory_tab.Location = new System.Drawing.Point(4, 27);
+            this.productsHistory_tab.Name = "productsHistory_tab";
+            this.productsHistory_tab.Padding = new System.Windows.Forms.Padding(3);
+            this.productsHistory_tab.Size = new System.Drawing.Size(775, 486);
+            this.productsHistory_tab.TabIndex = 5;
+            this.productsHistory_tab.Text = "Products History";
+            this.productsHistory_tab.UseVisualStyleBackColor = true;
+            // 
+            // productsHistoryTotal_label
+            // 
+            this.productsHistoryTotal_label.AutoSize = true;
+            this.productsHistoryTotal_label.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.productsHistoryTotal_label.Location = new System.Drawing.Point(400, 326);
+            this.productsHistoryTotal_label.Name = "productsHistoryTotal_label";
+            this.productsHistoryTotal_label.Size = new System.Drawing.Size(0, 19);
+            this.productsHistoryTotal_label.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label4.Location = new System.Drawing.Point(255, 326);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(127, 19);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Product\'s Turnover:";
+            // 
+            // productsHistory_datagrid
+            // 
+            this.productsHistory_datagrid.AllowUserToAddRows = false;
+            this.productsHistory_datagrid.AllowUserToDeleteRows = false;
+            this.productsHistory_datagrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.productsHistory_datagrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.productsHistory_datagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productsHistory_datagrid.Location = new System.Drawing.Point(56, 116);
+            this.productsHistory_datagrid.Name = "productsHistory_datagrid";
+            this.productsHistory_datagrid.ReadOnly = true;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.productsHistory_datagrid.RowsDefaultCellStyle = dataGridViewCellStyle14;
+            this.productsHistory_datagrid.Size = new System.Drawing.Size(668, 150);
+            this.productsHistory_datagrid.TabIndex = 7;
+            // 
+            // productIds_combobox
+            // 
+            this.productIds_combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.productIds_combobox.FormattingEnabled = true;
+            this.productIds_combobox.Location = new System.Drawing.Point(417, 53);
+            this.productIds_combobox.Name = "productIds_combobox";
+            this.productIds_combobox.Size = new System.Drawing.Size(37, 23);
+            this.productIds_combobox.TabIndex = 6;
+            this.productIds_combobox.TextChanged += new System.EventHandler(this.productIds_combobox_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label5.Location = new System.Drawing.Point(271, 57);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(111, 19);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Choose Product:";
+            // 
             // App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 515);
+            this.BackColor = System.Drawing.SystemColors.Menu;
+            this.ClientSize = new System.Drawing.Size(781, 474);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "App";
             this.Text = "Digital Storehouse";
             this.Load += new System.EventHandler(this.App_Load);
@@ -1668,6 +1862,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator_OrdersProducts)).EndInit();
             this.bindingNavigator_OrdersProducts.ResumeLayout(false);
             this.bindingNavigator_OrdersProducts.PerformLayout();
+            this.ordersHistory_tab.ResumeLayout(false);
+            this.ordersHistory_tab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersHistory_dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storehouseDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.storehouseDataSet1BindingSource)).EndInit();
+            this.productsHistory_tab.ResumeLayout(false);
+            this.productsHistory_tab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productsHistory_datagrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1688,7 +1890,6 @@
         private System.Windows.Forms.Label firstName_label;
         private System.Windows.Forms.Label lastName_label;
         private System.Windows.Forms.Label customerId_label;
-        private System.Windows.Forms.Label comments_value_label;
         private System.Windows.Forms.Label age_value_label;
         private System.Windows.Forms.Label afm_value_label;
         private System.Windows.Forms.Label address_value_label;
@@ -1775,7 +1976,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem4;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem4;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator13;
-        private System.Windows.Forms.Label hasPhoto_label;
         private System.Windows.Forms.BindingNavigator bindingNavigator_Products;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem5;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem5;
@@ -1815,9 +2015,24 @@
         private System.Windows.Forms.Button addRelationship_button;
         private System.Windows.Forms.Button updateRelationship_button;
         private System.Windows.Forms.Button deleteRelationship_button;
-        private System.Windows.Forms.Label customer_id_F_label;
-        private System.Windows.Forms.Label productId_F_label;
-        private System.Windows.Forms.Label orderId_F_label;
+        private System.Windows.Forms.Label customerId_F_value_label;
+        private System.Windows.Forms.Label productId_F_value_label;
+        private System.Windows.Forms.Label orderId_F_value_label;
+        private System.Windows.Forms.RichTextBox comments_richTextbox;
+        private System.Windows.Forms.TabPage ordersHistory_tab;
+        private System.Windows.Forms.Label ordersHistoryTotal_label;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView ordersHistory_dataGridView;
+        private System.Windows.Forms.BindingSource storehouseDataSet1BindingSource;
+        private StorehouseDataSet1 storehouseDataSet1;
+        private System.Windows.Forms.ComboBox customerIds_combobox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage productsHistory_tab;
+        private System.Windows.Forms.Label productsHistoryTotal_label;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView productsHistory_datagrid;
+        private System.Windows.Forms.ComboBox productIds_combobox;
+        private System.Windows.Forms.Label label5;
     }
 }
 

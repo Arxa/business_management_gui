@@ -14,18 +14,18 @@ namespace Digital_Storehouse.Daos
 {
     public class NewCustomerDAO : DatabaseConnection
     {
-        public NewCustomerDAO(Dictionary<string, Label> customerValueLabels, BindingNavigator bindingNavigator, Dictionary<string, Label> ProductValueLabels, BindingNavigator bindingNavigator_Products, Dictionary<string, Label> OrderValueLabels, BindingNavigator bindingNavigator_Orders, Dictionary<string, Label> OrderProductsValueLabels, BindingNavigator bindingNavigator_OrdersProducts) : base(customerValueLabels, bindingNavigator, ProductValueLabels, bindingNavigator_Products, OrderValueLabels, bindingNavigator_Orders, OrderProductsValueLabels, bindingNavigator_OrdersProducts)
+        public NewCustomerDAO()
         {
         }
 
 
         /// <exception cref="SqlException">Why it's thrown.</exception>
-        public static string AddNewCustomer(Dictionary<String, MyTextBox> newCustomerTextboxes, DateTime birthDate)
+        public static string AddNewCustomer(Dictionary<String, MyTextBox> newCustomerTextboxes, DateTime birthDate, RichTextBox comments_richTextbox)
         {
             string query = "INSERT INTO CUSTOMERS (LAST_NAME, FIRST_NAME, BIRTH_DATE, AGE, " +
-                           "AFM, DOY, ADDRESS, CITY, PHONE_NUMBER, COMMENTS, PHOTO, HAS_PHOTO) " +
+                           "AFM, DOY, ADDRESS, CITY, PHONE_NUMBER, COMMENTS, PHOTO) " +
                            "VALUES(@LASTNAME_P, @FIRSTNAME_P, @BIRTHDATE_P, @AGE_P, @AFM_P, " +
-                           "@DOY_P, @ADDRESS_P, @CITY_P, @PHONENUMBER_P, @COMMENTS_P, @PHOTO_P, @HASPHOTO_P)";
+                           "@DOY_P, @ADDRESS_P, @CITY_P, @PHONENUMBER_P, @COMMENTS_P, @PHOTO_P)";
 
             SqlCommand command = new SqlCommand(query, Conn);
 
@@ -49,20 +49,18 @@ namespace Digital_Storehouse.Daos
             command.Parameters.AddWithValue("@ADDRESS_P", newCustomerTextboxes["ADDRESS"].Text);
             command.Parameters.AddWithValue("@CITY_P", newCustomerTextboxes["CITY"].Text);
             command.Parameters.AddWithValue("@PHONENUMBER_P", newCustomerTextboxes["PHONE_NUMBER"].Text);
-            command.Parameters.AddWithValue("@COMMENTS_P", newCustomerTextboxes["COMMENTS"].Text);
+            command.Parameters.AddWithValue("@COMMENTS_P", comments_richTextbox.Text);
 
             // Bind image
             if (newCustomerTextboxes["PHOTO"].Text.Equals(Container.EMPTY))
             {
                 byte[] bytes = GetImageBytesFromImage(Resources.no_photo);
                 command.Parameters.AddWithValue("@PHOTO_P", bytes);
-                command.Parameters.AddWithValue("@HASPHOTO_P", Container.HAS_PHOTO_FALSE);
             }
             else
             {
                 byte[] bytes = GetImageBytesFromPath(newCustomerTextboxes["PHOTO"].Text.Trim());
-                command.Parameters.AddWithValue("@PHOTO_P", bytes);
-                command.Parameters.AddWithValue("@HASPHOTO_P", Container.HAS_PHOTO_TRUE);
+                command.Parameters.AddWithValue("@PHOTO_P", bytes);  
             }
 
             openConnectionIfClosed();
@@ -81,7 +79,7 @@ namespace Digital_Storehouse.Daos
                 return id_added;
 
             }
-            catch (SqlException e)
+            catch (SqlException)
             {
                 Conn.Close();
                 return Container.SELECT_FAILURE;

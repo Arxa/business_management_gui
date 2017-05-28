@@ -13,11 +13,7 @@ namespace Digital_Storehouse.Daos
 {
     public class AppDAO : DatabaseConnection
     {
-        public AppDAO(Dictionary<string, Label> customerValueLabels, BindingNavigator bindingNavigator, Dictionary<string, Label> ProductValueLabels, BindingNavigator bindingNavigator_Products, Dictionary<string, Label> OrderValueLabels, BindingNavigator bindingNavigator_Orders, Dictionary<string, Label> OrderProductsValueLabels, BindingNavigator bindingNavigator_OrdersProducts) : base(customerValueLabels, bindingNavigator, ProductValueLabels, bindingNavigator_Products, OrderValueLabels, bindingNavigator_Orders, OrderProductsValueLabels, bindingNavigator_OrdersProducts)
-        {
-        }
-
-
+        
         public static void LoadCustomerPhoto(PictureBox picbox, int customerId)
         {
             string sql = "SELECT PHOTO FROM CUSTOMERS WHERE CUSTOMER_ID = @id;";
@@ -101,8 +97,8 @@ namespace Digital_Storehouse.Daos
             Conn.Close();
         }
 
+
         
-            
    
 
 

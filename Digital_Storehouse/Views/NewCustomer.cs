@@ -39,20 +39,19 @@ namespace Digital_Storehouse.Views
             newCustomerTextboxes["CITY"] = city_textbox;
             newCustomerTextboxes["PHONE_NUMBER"] = phone_textbox;
             newCustomerTextboxes["PHOTO"] = photo_textbox;
-            newCustomerTextboxes["COMMENTS"] = comments_textbox;
 
             NewCustomerController.syncNewCustomerForm(pictureBox1, removePhoto_buton, photo_textbox);
         }
 
         private void addCustomer_button_Click(object sender, EventArgs e)
         {
-            NewCustomerController.AddNewCustomer(newCustomerTextboxes, birthDate_picker.Value.Date, bindingNavigatorCustomers, this);
+            NewCustomerController.AddNewCustomer(newCustomerTextboxes, birthDate_picker.Value.Date, comments_richTextbox, bindingNavigatorCustomers, this);
         }
 
         private void choosePhoto_button_Click(object sender, EventArgs e)
         {
             NewCustomerController.ShowPhotoDialogChooser(openFileDialog1, photo_textbox);
-            pictureBox1.Image = Image.FromFile(photo_textbox.Text);
+            NewCustomerController.loadPhotoAfterDialog(pictureBox1, photo_textbox.Text);
             NewCustomerController.syncNewCustomerForm(pictureBox1, removePhoto_buton, photo_textbox);
         }
 

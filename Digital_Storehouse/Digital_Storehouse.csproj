@@ -50,14 +50,24 @@
   <ItemGroup>
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\NewCustomerController.cs" />
+    <Compile Include="Controllers\NewOrdersProductsController.cs" />
+    <Compile Include="Controllers\NewProductController.cs" />
     <Compile Include="Controllers\UpdateCustomerController.cs" />
+    <Compile Include="Controllers\UpdateOrderController.cs" />
+    <Compile Include="Controllers\UpdateOrdersProductsController.cs" />
+    <Compile Include="Controllers\UpdateProductController.cs" />
     <Compile Include="Controllers\ViewMessages.cs" />
     <Compile Include="Daos\AppDAO.cs" />
     <Compile Include="Daos\DatabaseConnection.cs" />
     <Compile Include="Daos\NewCustomerDAO.cs" />
     <Compile Include="Controllers\NewOrderController.cs" />
     <Compile Include="Daos\NewOrderDAO.cs" />
+    <Compile Include="Daos\NewOrdersProductsDAO.cs" />
+    <Compile Include="Daos\NewProductDAO.cs" />
     <Compile Include="Daos\UpdateCustomerDAO.cs" />
+    <Compile Include="Daos\UpdateOrderDAO.cs" />
+    <Compile Include="Daos\UpdateOrdersProductsDAO.cs" />
+    <Compile Include="Daos\UpdateProductDAO.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\MyTestBox.cs">
       <SubType>Component</SubType>
@@ -93,11 +103,41 @@
     <Compile Include="Views\NewOrder.Designer.cs">
       <DependentUpon>NewOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewOrdersProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\NewOrdersProducts.Designer.cs">
+      <DependentUpon>NewOrdersProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\NewProduct.Designer.cs">
+      <DependentUpon>NewProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UpdateCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\UpdateCustomer.Designer.cs">
       <DependentUpon>UpdateCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateOrder.Designer.cs">
+      <DependentUpon>UpdateOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateOrdersProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateOrdersProducts.Designer.cs">
+      <DependentUpon>UpdateOrdersProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateProduct.Designer.cs">
+      <DependentUpon>UpdateProduct.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Views\App.resx">
       <DependentUpon>App.cs</DependentUpon>
@@ -118,8 +158,23 @@
     <EmbeddedResource Include="Views\NewOrder.resx">
       <DependentUpon>NewOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewOrdersProducts.resx">
+      <DependentUpon>NewOrdersProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewProduct.resx">
+      <DependentUpon>NewProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UpdateCustomer.resx">
       <DependentUpon>UpdateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UpdateOrder.resx">
+      <DependentUpon>UpdateOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UpdateOrdersProducts.resx">
+      <DependentUpon>UpdateOrdersProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UpdateProduct.resx">
+      <DependentUpon>UpdateProduct.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
