@@ -18,7 +18,7 @@ namespace Digital_Storehouse.Controllers
 
 
         public static void UpdateCustomer(PictureBox pictureBox, Dictionary<String, MyTextBox> updateCustomerTextboxes, Dictionary<String, Label> customerValueLabels,
-            PictureBox customerPictureBox, RichTextBox comments_richTextbox, BindingNavigator bindingNavigatorCustomers, UpdateCustomer updateCustomerForm)
+            PictureBox customerPictureBox, RichTextBox comments_richTextbox, DateTime birthDate, BindingNavigator bindingNavigatorCustomers, UpdateCustomer updateCustomerForm)
         {
             if (!NewCustomerController.ValidateFields(updateCustomerTextboxes, !updateCustomerTextboxes["AFM"].Text.Equals(customerValueLabels["AFM"].Text)))
             {
@@ -28,7 +28,7 @@ namespace Digital_Storehouse.Controllers
             // Refresh the Binding Navigator if customer was updated succesfully
             try
             {
-                UpdateCustomerDAO.UpdateCustomer(pictureBox, comments_richTextbox, updateCustomerTextboxes, Int32.Parse(customerValueLabels["CUSTOMER_ID"].Text));
+                UpdateCustomerDAO.UpdateCustomer(pictureBox, comments_richTextbox, birthDate, updateCustomerTextboxes, Int32.Parse(customerValueLabels["CUSTOMER_ID"].Text));
 
                 int currentPage = bindingNavigatorCustomers.BindingSource.Position;
                 foreach (KeyValuePair<String, Label> entry in App.GetCustomerLabels())

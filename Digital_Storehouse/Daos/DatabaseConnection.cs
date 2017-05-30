@@ -212,6 +212,19 @@ namespace Digital_Storehouse.Daos
             Conn.Close(); // Close Connection
         }
 
+        public static DataSet GetDataSet()
+        {
+            openConnectionIfClosed();
+
+            string query = "SELECT * FROM CUSTOMERS";
+            SqlDataAdapter adapter = new SqlDataAdapter(query, Conn);
+            DataSet dataset = new DataSet();
+            
+            adapter.Fill(dataset, "Test_Table");
+
+            return dataset;
+        }
+
 
         public static BindingSource getBindSourceCustomer()
         {

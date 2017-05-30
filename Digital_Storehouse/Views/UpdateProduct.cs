@@ -53,5 +53,10 @@ namespace Digital_Storehouse.Views
         {
             UpdateProductController.updateProduct(updatedProductValueLabels, bindingNavigator_Products, this, productId);
         }
+
+        private void cance_button_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

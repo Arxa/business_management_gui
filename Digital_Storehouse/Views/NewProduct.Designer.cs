@@ -47,6 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // manufacturer_label
@@ -236,11 +237,22 @@
             this.label5.TabIndex = 91;
             this.label5.Text = "*";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label4.Location = new System.Drawing.Point(38, 144);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(208, 26);
+            this.label4.TabIndex = 104;
+            this.label4.Text = "Use comma for decimal numbers. e.g. 0,96\r\nDot notation is ignored. e.g. 0.96";
+            // 
             // NewProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 279);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -290,5 +302,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }

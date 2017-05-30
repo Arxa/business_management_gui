@@ -40,7 +40,6 @@ namespace Digital_Storehouse.Views
             this.address_label = new System.Windows.Forms.Label();
             this.doy_label = new System.Windows.Forms.Label();
             this.afm_label = new System.Windows.Forms.Label();
-            this.age_label = new System.Windows.Forms.Label();
             this.birthDate_label = new System.Windows.Forms.Label();
             this.firstName_label = new System.Windows.Forms.Label();
             this.lastName_label = new System.Windows.Forms.Label();
@@ -56,7 +55,6 @@ namespace Digital_Storehouse.Views
             this.removePhoto_button = new System.Windows.Forms.Button();
             this.lastName_textbox = new Digital_Storehouse.Models.MyTextBox();
             this.firstName_textbox = new Digital_Storehouse.Models.MyTextBox();
-            this.age_textbox = new Digital_Storehouse.Models.MyTextBox();
             this.afm_textbox = new Digital_Storehouse.Models.MyTextBox();
             this.address_textbox = new Digital_Storehouse.Models.MyTextBox();
             this.doy_textbox = new Digital_Storehouse.Models.MyTextBox();
@@ -74,7 +72,7 @@ namespace Digital_Storehouse.Views
             this.choosePhoto_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.choosePhoto_button.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.choosePhoto_button.ForeColor = System.Drawing.Color.Blue;
-            this.choosePhoto_button.Location = new System.Drawing.Point(233, 416);
+            this.choosePhoto_button.Location = new System.Drawing.Point(76, 320);
             this.choosePhoto_button.Name = "choosePhoto_button";
             this.choosePhoto_button.Size = new System.Drawing.Size(71, 23);
             this.choosePhoto_button.TabIndex = 78;
@@ -86,7 +84,7 @@ namespace Digital_Storehouse.Views
             // 
             this.photo_label.AutoSize = true;
             this.photo_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.photo_label.Location = new System.Drawing.Point(33, 421);
+            this.photo_label.Location = new System.Drawing.Point(31, 362);
             this.photo_label.Name = "photo_label";
             this.photo_label.Size = new System.Drawing.Size(54, 13);
             this.photo_label.TabIndex = 76;
@@ -177,21 +175,11 @@ namespace Digital_Storehouse.Views
             // 
             this.afm_label.AutoSize = true;
             this.afm_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.afm_label.Location = new System.Drawing.Point(33, 278);
+            this.afm_label.Location = new System.Drawing.Point(33, 231);
             this.afm_label.Name = "afm_label";
             this.afm_label.Size = new System.Drawing.Size(36, 13);
             this.afm_label.TabIndex = 58;
             this.afm_label.Text = "AFM:";
-            // 
-            // age_label
-            // 
-            this.age_label.AutoSize = true;
-            this.age_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.age_label.Location = new System.Drawing.Point(33, 234);
-            this.age_label.Name = "age_label";
-            this.age_label.Size = new System.Drawing.Size(36, 13);
-            this.age_label.TabIndex = 57;
-            this.age_label.Text = "AGE:";
             // 
             // birthDate_label
             // 
@@ -225,7 +213,7 @@ namespace Digital_Storehouse.Views
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(36, 462);
+            this.pictureBox1.Location = new System.Drawing.Point(36, 392);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(230, 230);
             this.pictureBox1.TabIndex = 79;
@@ -303,7 +291,7 @@ namespace Digital_Storehouse.Views
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(9, 273);
+            this.label3.Location = new System.Drawing.Point(9, 226);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(18, 24);
             this.label3.TabIndex = 86;
@@ -315,7 +303,7 @@ namespace Digital_Storehouse.Views
             this.removePhoto_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.removePhoto_button.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removePhoto_button.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.removePhoto_button.Location = new System.Drawing.Point(320, 416);
+            this.removePhoto_button.Location = new System.Drawing.Point(163, 320);
             this.removePhoto_button.Name = "removePhoto_button";
             this.removePhoto_button.Size = new System.Drawing.Size(71, 23);
             this.removePhoto_button.TabIndex = 87;
@@ -341,18 +329,9 @@ namespace Digital_Storehouse.Views
             this.firstName_textbox.TabIndex = 89;
             this.firstName_textbox.TextChanged += new System.EventHandler(this.lastName_textbox_TextChanged);
             // 
-            // age_textbox
-            // 
-            this.age_textbox.Location = new System.Drawing.Point(134, 234);
-            this.age_textbox.MaxLength = 3;
-            this.age_textbox.Name = "age_textbox";
-            this.age_textbox.Size = new System.Drawing.Size(108, 20);
-            this.age_textbox.TabIndex = 90;
-            this.age_textbox.TextChanged += new System.EventHandler(this.lastName_textbox_TextChanged);
-            // 
             // afm_textbox
             // 
-            this.afm_textbox.Location = new System.Drawing.Point(134, 278);
+            this.afm_textbox.Location = new System.Drawing.Point(134, 231);
             this.afm_textbox.MaxLength = 9;
             this.afm_textbox.Name = "afm_textbox";
             this.afm_textbox.Size = new System.Drawing.Size(108, 20);
@@ -398,7 +377,7 @@ namespace Digital_Storehouse.Views
             // photo_textbox
             // 
             this.photo_textbox.Enabled = false;
-            this.photo_textbox.Location = new System.Drawing.Point(107, 418);
+            this.photo_textbox.Location = new System.Drawing.Point(105, 359);
             this.photo_textbox.Name = "photo_textbox";
             this.photo_textbox.Size = new System.Drawing.Size(100, 20);
             this.photo_textbox.TabIndex = 97;
@@ -429,7 +408,7 @@ namespace Digital_Storehouse.Views
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 704);
+            this.ClientSize = new System.Drawing.Size(543, 643);
             this.Controls.Add(this.comments_richTextbox);
             this.Controls.Add(this.hasPhoto_label);
             this.Controls.Add(this.photo_textbox);
@@ -438,7 +417,6 @@ namespace Digital_Storehouse.Views
             this.Controls.Add(this.doy_textbox);
             this.Controls.Add(this.address_textbox);
             this.Controls.Add(this.afm_textbox);
-            this.Controls.Add(this.age_textbox);
             this.Controls.Add(this.firstName_textbox);
             this.Controls.Add(this.lastName_textbox);
             this.Controls.Add(this.removePhoto_button);
@@ -460,7 +438,6 @@ namespace Digital_Storehouse.Views
             this.Controls.Add(this.address_label);
             this.Controls.Add(this.doy_label);
             this.Controls.Add(this.afm_label);
-            this.Controls.Add(this.age_label);
             this.Controls.Add(this.birthDate_label);
             this.Controls.Add(this.firstName_label);
             this.Controls.Add(this.lastName_label);
@@ -488,7 +465,6 @@ namespace Digital_Storehouse.Views
         private System.Windows.Forms.Label address_label;
         private System.Windows.Forms.Label doy_label;
         private System.Windows.Forms.Label afm_label;
-        private System.Windows.Forms.Label age_label;
         private System.Windows.Forms.Label birthDate_label;
         private System.Windows.Forms.Label firstName_label;
         private System.Windows.Forms.Label lastName_label;
@@ -504,7 +480,6 @@ namespace Digital_Storehouse.Views
         private System.Windows.Forms.Button removePhoto_button;
         private MyTextBox lastName_textbox;
         private MyTextBox firstName_textbox;
-        private MyTextBox age_textbox;
         private MyTextBox afm_textbox;
         private MyTextBox address_textbox;
         private MyTextBox doy_textbox;

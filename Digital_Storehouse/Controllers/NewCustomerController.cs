@@ -59,19 +59,6 @@ namespace Digital_Storehouse.Controllers
                 return false;
             }
 
-            // Check for AGE input
-            if (!Int32.TryParse(newCustomerTextboxes["AGE"].Text.Trim(), out n) && newCustomerTextboxes["AGE"].Text.Trim().Length > 0)
-            {
-                ViewMessages.NonIntegerAge();
-                return false;
-            }
-
-            if (n < 0 || n > 150)
-            {
-                ViewMessages.OutOfScopeAge();
-                return false;
-            }
-
             return true;
         }
 

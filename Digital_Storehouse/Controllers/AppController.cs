@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -243,6 +245,42 @@ namespace Digital_Storehouse.Controllers
                 }
             }
             return true;
+        }
+
+        public static void createCustomersHistoryDataGrid(DataGridView ordersHistory_dataGridView, ComboBox customerIds_combobox, DataGridViewTextBoxColumn totalColumn, Label ordersHistoryTotal_label)
+        {
+            db.BindOrdersHistoryDataGrid(ordersHistory_dataGridView, customerIds_combobox.GetItemText(customerIds_combobox.SelectedItem));
+
+            if (!ordersHistory_dataGridView.Columns.Contains(totalColumn))
+            {
+                ordersHistory_dataGridView.Columns.Add(totalColumn);
+            }
+
+            int index = ordersHistory_dataGridView.Columns.IndexOf(totalColumn);
+
+            float grandTotal = 0;
+
+            for (int i = 0; i < ordersHistory_dataGridView.RowCount; i++)
+            {
+                float total = float.Parse(ordersHistory_dataGridView.Rows[i].Cells["UNIT_PRICE"].Value.ToString()) *
+                              float.Parse(ordersHistory_dataGridView.Rows[i].Cells["AMOUNT"].Value.ToString());
+
+                ordersHistory_dataGridView.Rows[i].Cells[index].Value = total;
+                grandTotal += total;
+            }
+            ordersHistoryTotal_label.Text = Convert.ToString(grandTotal, CultureInfo.InvariantCulture);
+
+            foreach (DataGridViewColumn column in ordersHistory_dataGridView.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        public static void exportDataForPrinter(DataGridView ordersHistory_dataGridView, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Bitmap bm = new Bitmap(ordersHistory_dataGridView.Width, ordersHistory_dataGridView.Height);
+            ordersHistory_dataGridView.DrawToBitmap(bm, new Rectangle(0, 0, ordersHistory_dataGridView.Width, ordersHistory_dataGridView.Height));
+            e.Graphics.DrawImage(bm, 0, 0);
         }
     }
 }

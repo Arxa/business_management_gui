@@ -51,7 +51,7 @@ namespace Digital_Storehouse.Views
         private void updateCustomer_button_Click(object sender, EventArgs e)
         {
             UpdateCustomerController.UpdateCustomer(pictureBox1, updateCustomerTextboxes, customerValueLabels, 
-                pictureBoxCustomer, comments_richTextbox, bindingNavigator_Customers, this);   
+                pictureBoxCustomer, comments_richTextbox, birthDate_picker.Value.Date, bindingNavigator_Customers, this);   
         }
 
         private void choosePhoto_button_Click(object sender, EventArgs e)
@@ -80,7 +80,6 @@ namespace Digital_Storehouse.Views
         {
             updateCustomerTextboxes["LAST_NAME"] = lastName_textbox;
             updateCustomerTextboxes["FIRST_NAME"] = firstName_textbox;
-            updateCustomerTextboxes["AGE"] = age_textbox;
             updateCustomerTextboxes["AFM"] = afm_textbox;
             updateCustomerTextboxes["DOY"] = doy_textbox;
             updateCustomerTextboxes["ADDRESS"] = address_textbox;
@@ -94,7 +93,6 @@ namespace Digital_Storehouse.Views
         {
             lastName_textbox.Text = customerValueLabels["LAST_NAME"].Text;
             firstName_textbox.Text = customerValueLabels["FIRST_NAME"].Text;
-            age_textbox.Text = customerValueLabels["AGE"].Text;
             afm_textbox.Text = customerValueLabels["AFM"].Text;
             doy_textbox.Text = customerValueLabels["DOY"].Text;
             address_textbox.Text = customerValueLabels["ADDRESS"].Text;

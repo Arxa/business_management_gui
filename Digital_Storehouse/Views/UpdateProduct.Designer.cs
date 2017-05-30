@@ -47,6 +47,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cance_button
@@ -59,6 +60,7 @@
             this.cance_button.TabIndex = 94;
             this.cance_button.Text = "Cancel";
             this.cance_button.UseVisualStyleBackColor = true;
+            this.cance_button.Click += new System.EventHandler(this.cance_button_Click);
             // 
             // update_button
             // 
@@ -235,11 +237,22 @@
             this.label6.TabIndex = 102;
             this.label6.Text = "*";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            this.label2.Location = new System.Drawing.Point(39, 162);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(208, 26);
+            this.label2.TabIndex = 103;
+            this.label2.Text = "Use comma for decimal numbers. e.g. 0,96\r\nDot notation is ignored. e.g. 0.96";
+            // 
             // UpdateProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 325);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -289,5 +302,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -32,7 +32,6 @@ namespace Digital_Storehouse.Views
 
             newCustomerTextboxes["LAST_NAME"] = lastName_textbox;
             newCustomerTextboxes["FIRST_NAME"] = firstName_textbox;
-            newCustomerTextboxes["AGE"] = age_textbox;
             newCustomerTextboxes["AFM"] = afm_textbox;
             newCustomerTextboxes["DOY"] = doy_textbox;
             newCustomerTextboxes["ADDRESS"] = address_textbox;

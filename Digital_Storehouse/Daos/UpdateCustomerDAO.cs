@@ -13,23 +13,18 @@ namespace Digital_Storehouse.Daos
     public class UpdateCustomerDAO : DatabaseConnection
     {
        
-        public static bool UpdateCustomer(PictureBox pictureBox, RichTextBox comments_richTextbox, Dictionary<String, MyTextBox> updateCustomerTextboxes, int customerId)
+        public static bool UpdateCustomer(PictureBox pictureBox, RichTextBox comments_richTextbox, DateTime birthDate, Dictionary<String, MyTextBox> updateCustomerTextboxes, int customerId)
         {
             using (var command = Conn.CreateCommand())
             {
                 command.CommandText = "UPDATE CUSTOMERS SET LAST_NAME = @LASTNAME_P, FIRST_NAME= @FIRSTNAME_P, BIRTH_DATE = @BIRTHDATE_P, " +
-                                      "AGE = @AGE_P, AFM = @AFM_P, DOY = @DOY_P, ADDRESS = @ADDRESS_P, CITY = @CITY_P, PHONE_NUMBER = @PHONENUMBER_P, " +
+                                      "AFM = @AFM_P, DOY = @DOY_P, ADDRESS = @ADDRESS_P, CITY = @CITY_P, PHONE_NUMBER = @PHONENUMBER_P, " +
                                       "COMMENTS = @COMMENTS_P, PHOTO = @PHOTO_P WHERE CUSTOMER_ID = @IDPARAM";
 
                 command.Parameters.AddWithValue("@LASTNAME_P", updateCustomerTextboxes["LAST_NAME"].Text);
                 command.Parameters.AddWithValue("@FIRSTNAME_P", updateCustomerTextboxes["FIRST_NAME"].Text);
 
-                DateTime birthdate = new DateTime(2017, 01, 22);
-                command.Parameters.AddWithValue("@BIRTHDATE_P", birthdate);
-
-                int age = Int32.Parse(updateCustomerTextboxes["AGE"].Text);
-                command.Parameters.AddWithValue("@AGE_P", age);
-
+                command.Parameters.AddWithValue("@BIRTHDATE_P", birthDate);
                 command.Parameters.AddWithValue("@AFM_P", updateCustomerTextboxes["AFM"].Text);
                 command.Parameters.AddWithValue("@DOY_P", updateCustomerTextboxes["DOY"].Text);
                 command.Parameters.AddWithValue("@ADDRESS_P", updateCustomerTextboxes["ADDRESS"].Text);

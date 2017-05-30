@@ -22,9 +22,9 @@ namespace Digital_Storehouse.Daos
         /// <exception cref="SqlException">Why it's thrown.</exception>
         public static string AddNewCustomer(Dictionary<String, MyTextBox> newCustomerTextboxes, DateTime birthDate, RichTextBox comments_richTextbox)
         {
-            string query = "INSERT INTO CUSTOMERS (LAST_NAME, FIRST_NAME, BIRTH_DATE, AGE, " +
+            string query = "INSERT INTO CUSTOMERS (LAST_NAME, FIRST_NAME, BIRTH_DATE, " +
                            "AFM, DOY, ADDRESS, CITY, PHONE_NUMBER, COMMENTS, PHOTO) " +
-                           "VALUES(@LASTNAME_P, @FIRSTNAME_P, @BIRTHDATE_P, @AGE_P, @AFM_P, " +
+                           "VALUES(@LASTNAME_P, @FIRSTNAME_P, @BIRTHDATE_P, @AFM_P, " +
                            "@DOY_P, @ADDRESS_P, @CITY_P, @PHONENUMBER_P, @COMMENTS_P, @PHOTO_P)";
 
             SqlCommand command = new SqlCommand(query, Conn);
@@ -33,17 +33,6 @@ namespace Digital_Storehouse.Daos
             command.Parameters.AddWithValue("@FIRSTNAME_P", newCustomerTextboxes["FIRST_NAME"].Text);
 
             command.Parameters.AddWithValue("@BIRTHDATE_P", birthDate);
-
-            if (newCustomerTextboxes["AGE"].Text.Length > 0)
-            {
-                int age = Int32.Parse(newCustomerTextboxes["AGE"].Text);
-                command.Parameters.AddWithValue("@AGE_P", age);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@AGE_P", 0);
-            }
-
             command.Parameters.AddWithValue("@AFM_P", newCustomerTextboxes["AFM"].Text);
             command.Parameters.AddWithValue("@DOY_P", newCustomerTextboxes["DOY"].Text);
             command.Parameters.AddWithValue("@ADDRESS_P", newCustomerTextboxes["ADDRESS"].Text);

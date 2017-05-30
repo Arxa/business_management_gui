@@ -1,17 +1,23 @@
 ﻿using Digital_Storehouse.Controllers;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Digital_Storehouse.Daos;
 using Digital_Storehouse.Views;
 using System.Threading;
+using Microsoft.Reporting.WinForms;
+using System.Drawing;
 
 namespace Digital_Storehouse
 {
     public partial class App : Form
     {
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+
         protected static Dictionary<String, Label> CustomerLabels = new Dictionary<string, Label>();
         protected static Dictionary<String, Label> ProductLabels = new Dictionary<string, Label>();
         protected static Dictionary<String, Label> OrderLabels = new Dictionary<string, Label>();
@@ -19,14 +25,14 @@ namespace Digital_Storehouse
 
         private static RichTextBox commentsRichTextBoxGlobal;
         private DataGridViewTextBoxColumn totalColumn = new DataGridViewTextBoxColumn();
-        private Thread myThread;
+        
         private static DatabaseConnection db;
 
         public App()
-        {
+        { 
             // Load application icon
             this.Icon = Properties.Resources.app;
-            totalColumn.HeaderText = "Total (€)";
+            totalColumn.HeaderText = Models.Container.TOTAL_COLUMN_NAME;
 
             InitializeComponent();
 
@@ -60,9 +66,13 @@ namespace Digital_Storehouse
             OrdersProductsLabels["AMOUNT"] = amount_value_label;
 
             db = new DatabaseConnection();
+
+            toolTip1.SetToolTip(pictureBox1, Models.Container.PRINT_ICON_TOOLTIP);
+
         }
 
-       
+        
+
 
         private void App_Load(object sender, EventArgs e)
         {
@@ -72,7 +82,6 @@ namespace Digital_Storehouse
             db.BindOrdersProductsData(OrdersProductsLabels, bindingNavigator_OrdersProducts);
 
             NewOrderController.fillCustomerIdCombobox(customerIds_combobox);
-            NewOrdersProductsController.fillcombobox(productIds_combobox);
             
             AppController.syncCustomersTab(AppDAO.getBindSourceCustomer(), CustomerLabels, pictureBox_customer,
                 deleteCustomer_button, updateCustomer_button);
@@ -85,9 +94,10 @@ namespace Digital_Storehouse
 
             AppController.syncOrdersProductsTab(AppDAO.getBindSourceOrdersProducts(), OrdersProductsLabels,
                 deleteRelationship_button, updateRelationship_button);
+            
         }
 
-       
+
         private void insertCustomer_button_Click(object sender, EventArgs e)
         {
             AppController.OpenNewCustomerForm(bindingNavigator_Customer);
@@ -224,53 +234,23 @@ namespace Digital_Storehouse
 
         private void customerIds_combobox_TextChanged(object sender, EventArgs e)
         {
-            db.BindOrdersHistoryDataGrid(ordersHistory_dataGridView, customerIds_combobox.GetItemText(customerIds_combobox.SelectedItem));
-
-            if (!ordersHistory_dataGridView.Columns.Contains(totalColumn))
-            {
-                ordersHistory_dataGridView.Columns.Add(totalColumn);
-            }
-            
-            int index = ordersHistory_dataGridView.Columns.IndexOf(totalColumn);
-
-            float grandTotal = 0;
-           
-                for (int i = 0; i < ordersHistory_dataGridView.RowCount; i++)
-                {
-                    float total = float.Parse(ordersHistory_dataGridView.Rows[i].Cells["UNIT_PRICE"].Value.ToString()) *
-                            float.Parse(ordersHistory_dataGridView.Rows[i].Cells["AMOUNT"].Value.ToString());
-
-                    ordersHistory_dataGridView.Rows[i].Cells[index].Value = total;
-                    grandTotal += total;
-                }
-                ordersHistoryTotal_label.Text = Convert.ToString(grandTotal, CultureInfo.InvariantCulture);
-
+            AppController.createCustomersHistoryDataGrid(ordersHistory_dataGridView, customerIds_combobox, totalColumn, ordersHistoryTotal_label);
         }
 
-        private void productIds_combobox_TextChanged(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            db.BindProductsHistoryDataGrid(productsHistory_datagrid, productIds_combobox.GetItemText(productIds_combobox.SelectedItem));
-
-            if (!productsHistory_datagrid.Columns.Contains(totalColumn))
-            {
-                productsHistory_datagrid.Columns.Add(totalColumn);
-            }
-
-            int index = productsHistory_datagrid.Columns.IndexOf(totalColumn);
-
-            float grandTotal = 0;
-            
-            
-                for (int i = 0; i < productsHistory_datagrid.RowCount; i++)
-                {
-                    float total = float.Parse(productsHistory_datagrid.Rows[i].Cells["UNIT_PRICE"].Value.ToString()) *
-                                  float.Parse(productsHistory_datagrid.Rows[i].Cells["AMOUNT"].Value.ToString());
-
-                    productsHistory_datagrid.Rows[i].Cells[index].Value = total;
-                    grandTotal += total;
-                }
-                productsHistoryTotal_label.Text = Convert.ToString(grandTotal, CultureInfo.InvariantCulture);
+            printDocument1.Print();
         }
+
+
+        private void printDocument1_PrintPage_1(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            AppController.exportDataForPrinter(ordersHistory_dataGridView, e);
+        }
+
+        
     }
+
+
 }
 
